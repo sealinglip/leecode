@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": ".leetcode",
+			"path": "."
+		}
+	],
+	"settings": {},
+	"fileheader.configObj": {
+		"prohibitAutoAdd": [
+			"json",
+			"md",
+			"py"
+		]
+	},
+	"fileheader.customMade": {}
+}
