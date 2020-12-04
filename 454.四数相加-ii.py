@@ -32,8 +32,31 @@ LastEditTime: 2020-11-28 22:12:15
 
 from typing import List
 # @lc code=start
+from collections import defaultdict
 class Solution:
     def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
+        # 将A、B归为一组，C、D归为一组
+        key1 = defaultdict(int)
+        for a in A:
+            for b in B:
+                k = a + b
+                key1[k] = key1[k] + 1
+        
+        key2 = defaultdict(int)
+        for c in C:
+            for d in D:
+                k = c + d
+                key2[k] = key2[k] + 1
+
+        cnt = 0
+        for k in key1:
+            if -k in key2:
+                cnt += key1[k] * key2[-k]
+
+        return cnt
         
 # @lc code=end
 
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.fourSumCount([1, 2], [-2, -1], [-1, 2], [0, 2]))
