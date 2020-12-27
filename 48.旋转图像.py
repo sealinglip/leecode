@@ -76,7 +76,6 @@ class Solution:
                 matrix[col][N - row - 1] = tmp
 
         
-
 # @lc code=end
 
 if __name__ == "__main__":
