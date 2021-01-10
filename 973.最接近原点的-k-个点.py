@@ -37,58 +37,31 @@ LastEditTime: 2020-11-09 22:23:00
 # -10000 < points[i][1] < 10000
 
 from typing import List, Tuple
+import heapq
 # @lc code=start
 import math
+
+
 class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         if not points:
             return points
 
         # 采用大顶堆来解决
-        topK, size = [None for i in range(K)], 0
+        q = [(-x ** 2 - y ** 2, i) for i, (x, y) in enumerate(points[:K])]
+        heapq.heapify(q)
 
-        def siftup(i: int, pt: Tuple):
-            while i > 0:
-                parent = (i - 1) >> 1
-                p = topK[parent]
-                if pt[0] <= p[0]:
-                    break
-                topK[i] = p
-                i = parent
-            topK[i] = pt
+        n = len(points)
+        for i in range(K, n):
+            x, y = points[i]
+            dist = -x ** 2 - y ** 2
+            heapq.heappushpop(q, (dist, i))
 
-        def siftdown(i: int, pt: Tuple):
-            half = K >> 1
-            while i < half:
-                child = (i << 1) + 1
-                c = topK[child]
-                right = child + 1
-                if right < size and c[0] < topK[right][0]:  # 取左右节点里的大值
-                    child = right
-                    c = topK[right]
-                if pt[0] >= c[0]:
-                    break
-                topK[i] = c
-                i = child
-            topK[i] = pt
+        ans = [points[identity] for (_, identity) in q]
+        return ans
 
-        def offer(pt: Tuple):
-            nonlocal size
-            i = size
-            if size < K:
-                size += 1
-            if i == 0:
-                topK[0] = pt
-            elif i < K:
-                siftup(i, pt)
-            elif pt[0] < topK[0][0]:
-                siftdown(0, pt)
-        
-        for pt in points:
-            offer((math.sqrt(pt[0] ** 2 + pt[1] ** 2), pt))
-        
-        return [pt[1] for pt in topK]
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
