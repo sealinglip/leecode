@@ -34,13 +34,14 @@ LastEditTime: 2020-09-01 08:57:37
 
 
 # 提示：
-
 # 1 <= 给定的数组长度 <= 20.
 # 数组里所有分数都为非负数且不会大于 10000000 。
 # 如果最终两个玩家的分数相等，那么玩家 1 仍为赢家。
 
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def PredictTheWinner(self, nums: List[int]) -> bool:
         if not nums:
@@ -49,15 +50,16 @@ class Solution:
         # 记 dp(i, j) 为子数组nums[i, j]时先手能实现的与后手的最佳分差（如果小于0，为必输）
         # dp(i, j) = max(nums[i] - dp(i+1, j), nums[j] - dp(i, j-1))  if j > i
         # dp(i, j) = nums[i] if j == i
-        
-        dp = nums[:] # make a copy，此时dp里存储的是dp(i, i)
+
+        dp = nums[:]  # make a copy，此时dp里存储的是dp(i, i)
         l = len(nums)
-        for delta in range(1, l): # delta 代表 j - i
-            for i in range(l - delta): # 计算dp(i, i + delta)
+        for delta in range(1, l):  # delta 代表 j - i
+            for i in range(l - delta):  # 计算dp(i, i + delta)
                 dp[i] = max(nums[i] - dp[i+1], nums[i + delta] - dp[i])
 
-        return dp[0] >= 0 # 此时dp[0]存的是dp(0, len(nums) - 1)
+        return dp[0] >= 0  # 此时dp[0]存的是dp(0, len(nums) - 1)
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
