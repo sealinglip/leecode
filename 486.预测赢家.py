@@ -65,3 +65,5 @@ if __name__ == "__main__":
     solution = Solution()
     print(solution.PredictTheWinner([1, 5, 233, 7]))
     print(solution.PredictTheWinner([1, 5, 2]))
+    print(solution.PredictTheWinner([1, 5, 2, 100, 4, 200, 54, 6]))
+    print(solution.PredictTheWinner([5, 2, 100, 4, 200, 54, 6]))
