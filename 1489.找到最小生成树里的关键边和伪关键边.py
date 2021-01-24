@@ -35,7 +35,67 @@ from typing import List
 
 class Solution:
     def findCriticalAndPseudoCriticalEdges(self, n: int, edges: List[List[int]]) -> List[List[int]]:
-        pass
+        parent = list(range(n))
+
+        def find(idx: int) -> int:
+            if idx != parent[idx]:
+                parent[idx] = find(parent[idx])
+            return parent[idx]
+
+        def union(idx1: int, idx2: int):
+            parent[idx2] = idx1
+
+        sorted_edges = [[i] + e for i, e in enumerate(edges)]
+        # 根据权重对边排序
+        sorted_edges.sort(key=lambda x: x[-1])
+
+        # 计算最小生成🌲的权值和
+        total = 0
+        for _, x, y, w in sorted_edges:
+            rx, ry = find(x), find(y)
+            if rx != ry:
+                union(rx, ry)
+                total += w
+
+        # 进行最小生成🌲的构造
+        key_edge = []  # 关键边
+        not_key_edge = []  # 非关键边
+        for i, edge in enumerate(sorted_edges):
+            _, cx, cy, cw = edge
+            # 去掉当前边，形成新的边列表
+            tmp_edges = sorted_edges[:i] + sorted_edges[i+1:]
+
+            # 1. 先连接当前边，得到连通边的权值和 total1
+            total1 = cw
+            parent = list(range(n))
+            union(cx, cy)
+            for i, (_, x, y, w) in enumerate(tmp_edges):
+                rx, ry = find(x), find(y)
+                if rx != ry:
+                    union(rx, ry)
+                    total1 += w
+
+            # 若 total和total1相等，表示该边为可能的关键边
+            if total != total1:
+                continue
+
+            # 2. 去掉当前边，得到的连通边权值和 total2
+            total2 = 0
+            parent = list(range(n))
+            for i, (_, x, y, w) in enumerate(tmp_edges):
+                rx, ry = find(x), find(y)
+                if rx != ry:
+                    union(rx, ry)
+                    total2 += w
+
+            # 若 total1不等于total2，则代表该边为 关键边，否则为伪关键边
+            if total1 != total2:
+                key_edge.append(edge[0])
+            else:
+                not_key_edge.append(edge[0])
+
+        return [key_edge, not_key_edge]
+
 
         # @lc code=end
 if __name__ == "__main__":
