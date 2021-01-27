@@ -5,7 +5,7 @@ Description: file content
 Author: Thomas Young
 Date: 2020-09-17 08:37:07
 LastEditors: Thomas Young
-LastEditTime: 2020-09-17 09:56:03
+LastEditTime: 2021-01-13 22:34:27
 '''
 #
 # @lc app=leetcode.cn id=685 lang=python3
@@ -63,7 +63,7 @@ class Solution:
                 duplicateEdge = edge
             else:
                 parent[edge[1]] = edge[0]
-        if duplicateEdge: # 判断与之冲突的边，是否成环，如果未成环，则返回本边，否则返回冲突边
+        if duplicateEdge: # 判断与之冲突的边，是否成环，如果未成环，则返回本边；如果有环，就要破环（本边不在环内），返回冲突边
             nodes = set()
             node = duplicateEdge[1]
             while node:
