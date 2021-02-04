@@ -15,6 +15,7 @@ class Solution:
 
         group = list(range(n))
 
+        # 并查集
         def find(idx: int) -> int:
             if idx != group[idx]:
                 group[idx] = find(group[idx])
