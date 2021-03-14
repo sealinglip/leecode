@@ -16,12 +16,26 @@ LastEditTime: 2020-11-08 22:32:37
 
 # 返回符合要求的最少分割次数。
 
-# 示例:
+# 示例1:
 # 输入: "aab"
 # 输出: 1
 # 解释: 进行一次分割就可将 s 分割成["aa", "b"] 这样两个回文子串。
 
+# 示例 2：
+# 输入：s = "a"
+# 输出：0
+
+# 示例 3：
+# 输入：s = "ab"
+# 输出：1
+
+# 提示：
+# 1 <= s.length <= 2000
+# s 仅由小写英文字母组成
+
 # @lc code=start
+
+
 class Solution:
     def minCut(self, s: str) -> int:
         if not s:
@@ -33,11 +47,11 @@ class Solution:
 
         # 预处理
         # 记dp[i][j]代表s[i:j+1]是否回文串
-        dp =[[True if i == j else False for j in range(N)] for i in range(N)]
+        dp = [[True if i == j else False for j in range(N)] for i in range(N)]
         for i in range(N - 1, -1, -1):
             for j in range(i + 1, N):
                 dp[i][j] = s[i] == s[j] and (j == i + 1 or dp[i + 1][j - 1])
-        
+
         # 记ans[i]代表s[0:i]的最小分隔数
         # 状态转移方程为ans[j] = min(ans[i] + 1 if dp[i][j-1])
         ans = [-1]
@@ -49,9 +63,10 @@ class Solution:
                     if cut < minCut:
                         minCut = cut
             ans.append(minCut)
-        
+
         return ans[-1]
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
