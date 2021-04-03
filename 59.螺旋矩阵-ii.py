@@ -12,10 +12,10 @@ LastEditTime: 2020-09-06 09:32:11
 #
 # [59] 螺旋矩阵 II
 #
-# 给定一个正整数 n，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。
+# 给定一个正整数 n，生成一个包含 1 到 n^2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。
 
-# 示例:
-# 输入: 3
+# 示例1:
+# 输入：n = 3
 # 输出:
 # [
 #     [1, 2, 3],
@@ -23,13 +23,22 @@ LastEditTime: 2020-09-06 09:32:11
 #     [7, 6, 5]
 # ]
 
+# 示例 2：
+# 输入：n = 1
+# 输出：[[1]]
+
+# 提示：
+# 1 <= n <= 20
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
         if not n:
             return []
-            
+
         res = [[0] * n for i in range(n)]
         lb, rb, ub, bb = 0, n - 1, 0, n - 1  # 左右上下的边界（闭区间）
         dir = 1  # 指针移动方向：1 右， 2 下， -1 左， -2 上
@@ -74,6 +83,7 @@ class Solution:
         return res
         pass
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

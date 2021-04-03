@@ -8,16 +8,18 @@ LastEditors: Thomas Young
 LastEditTime: 2020-09-27 08:19:04
 '''
 from collections import deque
+
+
 class TreeNode:
-    def __init__(self, x):
+    def __init__(self, x, left=None, right=None):
         self.val = x
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
     # BFS遍历树解法
     def serialize(self) -> str:
         """Encodes a tree to a single string.
-        
+
         :type root: TreeNode
         :rtype: str
         """
@@ -44,7 +46,7 @@ class TreeNode:
         for v in arr:
             nodeList.append(TreeNode(v) if v != None else None)
 
-        depth = [nodeList[0]] # 逐层构建
+        depth = [nodeList[0]]  # 逐层构建
         i = 1
         l = len(nodeList)
         while depth and i < l:
@@ -67,7 +69,7 @@ class TreeNode:
 
                 if i >= l:
                     break
-                
+
             depth = newDepth
 
         return nodeList[0]
@@ -81,7 +83,7 @@ class TreeNode:
         preNull = False
         root = None
         for num in arr:
-            if num is None: # 空
+            if num is None:  # 空
                 if preNull:
                     stack.pop()
                 preNull = True
