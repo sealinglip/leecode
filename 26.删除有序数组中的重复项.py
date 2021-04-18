@@ -12,8 +12,10 @@
 #
 # [26] 删除排序数组中的重复项
 #
-
+from typing import List
 # @lc code=start
+
+
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         length, deleted = len(nums), 0
@@ -25,7 +27,6 @@ class Solution:
                 deleted += 1
             else:
                 preVal = nums[i]
-        
+
         return length - deleted
 # @lc code=end
-
