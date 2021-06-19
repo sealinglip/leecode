@@ -31,7 +31,7 @@ class Solution:
         lo, hi = 1, n
 
         while lo < hi:
-            mi = lo + ((hi - lo) >> 1)
+            mi = ((hi + lo) >> 1)
             if isBadVersion(mi):
                 hi = mi
             else:
