@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+'''
+Description: file content
+Author: Thomas Young
+Date: 2021-07-13 21:33:04
+LastEditors: Thomas Young
+LastEditTime: 2021-07-13 22:34:50
+'''
 #
 # @lc app=leetcode.cn id=218 lang=python3
 #
@@ -33,39 +42,49 @@
 
 from typing import List
 # @lc code=start
-
+import heapq
 
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
-        skyLine = []
-        for l, r, h in buildings:
-            if len(skyLine) == 0 or l > skyLine[-1][0]:
-                # 脱节
-                skyLine.extend([[l, h], [r, 0]])
-            elif h < skyLine[-2][1]:
-                # 有重叠且比前者小
-                if r > skyLine[-1][0]:
-                    skyLine[-1][1] = h
-                    skyLine.append([r, 0])
-            elif h == skyLine[-2][1]:
-                skyLine[-1][0] = r
-            else:
-                i = -2
-                while skyLine[i][1] < h and skyLine[i][0] >= l:
-                    i -= 1
-                # 插入左边界
-                delH = skyLine[i][1]
-                i += 1
-                skyLine.insert(i, [l, h])
-                # 处理右边界
-                while skyLine[i][1] < h and skyLine[i][0] < r:
-                    delH = skyLine[i][1]
-                    del skyLine[i]
-                if skyLine[i][1] < h and skyLine[i][0] > r:
-                    skyLine.insert(i, [r, 0 if skyLine[i][1] else delH])
-
-        return skyLine
-
+        s = []
+        ans = []
+        cur = 0
+        for left, right, height in buildings:
+            while s and s[0][1] < left:
+                rh, r = heapq.heappop(s)
+                if r >= cur:
+                    if not s or rh != s[0][0]:
+                        while s and r > s[0][1]:
+                            heapq.heappop(s)
+                        rh = -s[0][0] if s else 0
+                        # 避免右端点重复
+                        if r == ans[-1][0]:
+                            ans[-1][1] = min(ans[-1][1], rh)
+                        else:
+                            ans.append([r, rh])
+                    cur = r
+            if not s or height > -s[0][0]:
+                # 避免左端点重复的问题
+                if ans and left == ans[-1][0]:
+                    ans[-1][1] = height
+                else:
+                    ans.append([left, height])
+            heapq.heappush(s, [-height, right])
+        while s:
+            rh, r = heapq.heappop(s)
+            if r >= cur:
+                if not s or rh != s[0][0]:
+                    while s and r > s[0][1]:
+                        heapq.heappop(s)
+                    rh = -s[0][0] if s else 0
+                    # 避免右端点重复
+                    if r == ans[-1][0]:
+                        ans[-1][1] = min(ans[-1][1], rh)
+                    else:
+                        ans.append([r, rh])
+                cur = r
+        return ans
+        
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
