@@ -74,6 +74,11 @@ class Solution:
         res = []
 
         def generateLine(start: int, end: int, space: int) -> str:
+            '''
+            start (inclusive): 本行放置的第一个单词在数组中的索引
+            end (exclusive): 本行放置的最后一个单词（不包含）在数组中的索引
+            space: 本行空格数
+            '''
             if end - start == 1:
                 return words[start] + " " * space
                 
