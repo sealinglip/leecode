@@ -58,7 +58,10 @@
 # 给定数独序列只包含数字 1-9 和字符 '.' 。
 # 给定数独永远是 9x9 形式的。
 
+from typing import List
 # @lc code=start
+
+
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         if not board or len(board) != 9 or len(board[0]) != 9:
@@ -66,35 +69,44 @@ class Solution:
 
         def setNum(row: int, col: int, val: int) -> bool:
             '''
-            设置某格
+            设置某格，如果该格不能设置，返回False，设置成功返回True
             '''
             flag = 1 << (val - 1)
             box = boxIdx(row, col)
             if (rows[row] & flag) or (cols[col] & flag) or (boxes[box] & flag):
-                return True
+                return False
             rows[row] |= flag
             cols[col] |= flag
             boxes[box] |= flag
-            return False
-        
-        n = 3 # 小块边长
-        N = 9 # 行长
+            return True
+
+        n = 3  # 小块边长
+        N = 9  # 行长
         MASK = (1 << N) - 1
-        boxIdx = lambda row, col: (row // 3) * 3 + (col // 3) # 小方块序号
+        def boxIdx(row, col): return (row // 3) * 3 + (col // 3)  # 小方块序号
 
         # 分别记录每行、每列，每个小方格的已用数字情况
-        rows = [0 for i in range(N)]
-        cols = [0 for i in range(N)]
-        boxes = [0 for i in range(N)]
+        rows = [0] * N
+        cols = [0] * N
+        boxes = [0] * N
 
         # 初始化
         for row, line in enumerate(board):
             for col, c in enumerate(line):
                 if c != '.':
                     d = int(c)
-                    if setNum(row, col, d):
+                    if not setNum(row, col, d):
                         return False
-        
-        return True
-# @lc code=end
 
+        return True
+
+
+# @lc code=end
+if __name__ == "__main__":
+    solution = Solution()
+    # True
+    print(solution.isValidSudoku([["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], [
+          "4", ".", ".", "8", ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]]))
+    # False
+    print(solution.isValidSudoku([["8", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], [
+          "4", ".", ".", "8", ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]]))
