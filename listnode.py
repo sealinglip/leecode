@@ -10,8 +10,9 @@ LastEditTime: 2020-11-21 22:23:47
 
 from typing import List
 
+
 class ListNode:
-    def __init__(self, x, next = None):
+    def __init__(self, x, next=None):
         self.val = x
         self.next = next
 
@@ -28,8 +29,9 @@ class ListNode:
         return head.next
 
 
-def printList(node: ListNode):
-        while node:
-            print(node.val, end=' ')
-            node = node.next
-        print()
+def printList(node: ListNode, end='\n'):
+    print('[', end='')
+    while node:
+        print(node.val, end=' ')
+        node = node.next
+    print(']', end=end)
