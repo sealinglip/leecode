@@ -35,27 +35,16 @@ from typing import List
 
 class Solution:
     def thirdMax(self, nums: List[int]) -> int:
-        top1 = top2 = top3 = None
+        top1 = top2 = top3 = float('-inf')
         for n in nums:
-            if top1 is None:
-                top1 = n
-            elif n != top1:
-                if top2 is None:
-                    top1, top2 = max(top1, n), min(top1, n)
-                elif n != top2:
-                    if top3 is None:
-                        top1, top2, top3 = max(
-                            top1, top2, n), (top1 + top2 + n), min(top1, top2, n)
-                        top2 -= top1 + top3
-                    elif n != top3 and n > top3:
-                        if n > top1:
-                            top1, top2, top3 = n, top1, top2
-                        elif n > top2:
-                            top2, top3 = n, top2
-                        else:
-                            top3 = n
+            if n > top1:
+                top1, top2, top3 = n, top1, top2
+            elif top1 > n > top2:
+                top2, top3 = n, top2
+            elif top2 > n > top3:
+                top3 = n
 
-        return top1 if top3 is None else top3
+        return top1 if top3 == float('-inf') else top3
 
 
         # @lc code=end
