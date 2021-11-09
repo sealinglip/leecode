@@ -44,11 +44,13 @@ from typing import List
 # @lc code=start
 import heapq
 
+
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
-        s = []
+        s = []  # 优先队列
         ans = []
         cur = 0
+        # 初始化优先队列
         for left, right, height in buildings:
             while s and s[0][1] < left:
                 rh, r = heapq.heappop(s)
@@ -84,10 +86,11 @@ class Solution:
                         ans.append([r, rh])
                 cur = r
         return ans
-        
+
+
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
     print(solution.getSkyline(
-        [[2, 9, 10], [3, 7, 15], [5, 12, 12], [15, 20, 10], [19, 24, 8]]))
-    print(solution.getSkyline([[0, 2, 3], [2, 5, 3]]))
+        [[2, 9, 10], [3, 7, 15], [5, 12, 12], [15, 20, 10], [19, 24, 8]]))  # [[2, 10], [3, 15], [7, 12], [12, 0], [15, 10], [20, 8], [24, 0]]
+    print(solution.getSkyline([[0, 2, 3], [2, 5, 3]]))  # [[0, 3], [5, 0]]
