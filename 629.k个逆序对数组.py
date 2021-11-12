@@ -29,25 +29,28 @@ class Solution:
         # 动规
         # 设dp(i, j)为1到i，要组成恰好有j个逆序对，不同排列的个数
         # 则有dp(i, 0) = 1, dp(i, j) = 0 if j < 0
-        # 且dp(i, j) = sum([dp(i-1, j + k - i) for k in range(1,i + 1)]) = sum([dp(i-1, k) for k in range(max(j - i + 1, 0), j)])
+        # 且dp(i, j) = sum([dp(i - 1, j + k - i) for k in range(1, i + 1)]) = sum([dp(i - 1, k) for k in range(max(j - i + 1, 0), j)])
+        #           = sum([dp(i - 1, k) for k in range(j)]) - (sum([dp(i - 1, k) for k in range(j - i)]) if j >= i else 0)
         # dp(i, *) 只依赖于dp(i-1, *)，可以降维
         # 有dp(i, *)实际上是dp(i-1, *)前缀和（之差），可以进一步优化计算量
         if k == 0:
             return 1
-        # 为了表示dp(i, j) = 0 if j < 0
-        # 这里dp的索引都偏移了1，dp[0]代表j<0的情况，dp[j] 对应上面方程里的dp(*, j-1)
+        # 为了表示dp(*, j) = 0 if j < 0
+        # dp数组的长度+1，利用dp[-1]表示👆方程里的dp(*, j) if j < 0
+        # 对应i为1的dp(1, j)前缀和 —— 因为实际上只有dp(1, 0) = 1，其他都为0，所以前缀和全是1
         dp = [1] * (k + 2)
-        dp[0] = 0
-        for i in range(1, n):
+        dp[-1] = 0
+        for i in range(2, n):
             newDp = [0] * (k + 2)
-            newDp[1] = 1
-            for j in range(1, k+1):
-                newDp[j+1] = (newDp[j] + dp[j+1] - dp[max(j - i + 1, 0)]) % MOD
+            newDp[0] = 1
+            for j in range(1, k + 1):
+                newDp[j] = (newDp[j - 1] + dp[j] - dp[max(j - i, -1)]) % MOD
             dp = newDp
-        return (dp[k + 1] - dp[max(k - n + 1, 0)]) % MOD
+        return (dp[k] - dp[max(k - n, -1)]) % MOD
 
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
+    print(solution.kInversePairs(4, 4))  # 5
     print(solution.kInversePairs(3, 0))  # 1
     print(solution.kInversePairs(3, 1))  # 2
