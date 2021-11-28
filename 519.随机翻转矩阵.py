@@ -5,7 +5,7 @@ Description: file content
 Author: Thomas Young
 Date: 2021-11-27 22:24:52
 LastEditors: Thomas Young
-LastEditTime: 2021-11-27 22:34:36
+LastEditTime: 2021-11-27 22:36:13
 '''
 #
 # @lc app=leetcode.cn id=519 lang=python3
@@ -67,7 +67,6 @@ class Solution:
         if rand < self.total:
             self.map[rand] = self.map.get(self.total, self.total)
         return [idx // self.dim[1], idx % self.dim[1]]
-
 
     def reset(self) -> None:
         self.map = {}
