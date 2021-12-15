@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+'''
+Description: file content
+Author: Thomas Young
+Date: 2021-12-15 22:13:40
+LastEditors: Thomas Young
+LastEditTime: 2021-12-15 22:49:27
+'''
 #
 # @lc app=leetcode.cn id=851 lang=python3
 #
@@ -39,8 +48,34 @@
 # richer 中的所有数对 互不相同
 # 对 richer 的观察在逻辑上是一致的
 
-
+from typing import List
 # @lc code=start
+from collections import deque
 class Solution:
     def loudAndRich(self, richer: List[List[int]], quiet: List[int]) -> List[int]:
+        N = len(quiet)
+        g = [[] for _ in range(N)] # g[i]存放比i小的所有
+        inDeg = [0] * N # 存放入度
+        for a, b in richer:
+            g[a].append(b)
+            inDeg[b] += 1
+
+        ans = list(range(N)) # 初始化ans[i] = i
+        # 从入度为0的节点开始处理
+        deq = deque(i for i, deg in enumerate(inDeg) if deg == 0)
+        while deq:
+            a = deq.popleft()
+            for b in g[a]:
+                if quiet[ans[a]] < quiet[ans[b]]:
+                    ans[b] = ans[a]
+                inDeg[b] -= 1
+                if inDeg[b] == 0:
+                    deq.append(b)
+
+        return ans
         # @lc code=end
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.loudAndRich([[1, 0], [2, 1], [3, 1], [3, 7], [
+          4, 3], [5, 3], [6, 3]], [3, 2, 5, 4, 6, 1, 7, 0]))  # [5, 5, 2, 5, 4, 5, 6, 7]
+    print(solution.loudAndRich([], [0]))  # [0]
