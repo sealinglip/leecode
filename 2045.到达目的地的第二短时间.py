@@ -45,7 +45,7 @@
 # 输出：11
 # 解释：
 # 最短时间路径是 1 -> 2 ，总花费时间 = 3 分钟
-# 最短时间路径是 1 -> 2 -> 1 -> 2 ，总花费时间 = 11 分钟
+# 次短时间路径是 1 -> 2 -> 1 -> 2 ，总花费时间 = 11 分钟
 
 
 # 提示：
@@ -65,16 +65,23 @@ from collections import deque
 
 class Solution:
     def secondMinimum(self, n: int, edges: List[List[int]], time: int, change: int) -> int:
+        # 构建连通图
         graph = [[] for _ in range(n + 1)]
         for x, y in edges:
             graph[x].append(y)
             graph[y].append(x)
 
+        # 路径长度一样则耗时一样，要求第二短时间即为求次短路径
+        # 假设到达节点i的时间为ti，则到达节点i+1的时间ti+1满足：
+        # ti+1 = ti + twait + time
+        # twait = 0 if 0 <= ti mod (2 * change) < change # 到达i时赶上绿灯，马上就能走
+        # twait = 2 * change - ti mode (2 * change) if change <= ti mode (2 * change) < 2 * change # 到达i的时候赶上红灯
+
         # dist[i][0] 表示从 1 到 i 的最短路长度，dist[i][1] 表示从 1 到 i 的严格次短路长度
         dist = [[float('inf')] * 2 for _ in range(n + 1)]
         dist[1][0] = 0
         q = deque([(1, 0)])
-        while dist[n][1] == float('inf'):
+        while dist[n][1] == float('inf'):  # 不求出1到n的次短路径不算完
             p = q.popleft()
             for y in graph[p[0]]:
                 d = p[1] + 1
@@ -91,7 +98,6 @@ class Solution:
                 ans += change * 2 - ans % (change * 2)
             ans += time
         return ans
-
 
         # @lc code=end
 if __name__ == "__main__":
