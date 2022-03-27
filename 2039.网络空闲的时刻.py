@@ -68,7 +68,7 @@
 from math import ceil
 from typing import List
 # @lc code=start
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 class Solution:
@@ -83,11 +83,11 @@ class Solution:
             map[v].append(u)
 
         # 求距离
-        stack = [0]
+        stack = deque([0])
         while stack:
-            u = stack.pop()
+            u = stack.popleft()
             for v in map[u]:
-                if v and (distance[v] == 0 or distance[v] > (distance[u] + 1)):
+                if v and distance[v] == 0:
                     distance[v] = distance[u] + 1
                     stack.append(v)
 
