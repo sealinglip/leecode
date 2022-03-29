@@ -58,6 +58,9 @@
 # 每个节点都可以从其他节点直接或者间接到达
 # 1 <= time, change <= 10^3
 
+# 复习
+# https://leetcode-cn.com/problems/second-minimum-time-to-reach-destination/solution/gong-shui-san-xie-yi-ti-shuang-jie-dui-y-88np/
+
 from typing import List
 # @lc code=start
 from collections import deque
