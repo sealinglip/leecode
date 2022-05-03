@@ -25,6 +25,8 @@
 # 0 <= routes[i][j] < 10 ^ 6
 # 0 <= source, target < 10 ^ 6
 
+# Hard
+
 from typing import List
 from collections import deque, defaultdict
 # @lc code=start

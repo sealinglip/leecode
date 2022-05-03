@@ -21,6 +21,8 @@
 # len(row) 是偶数且数值在[4, 60]范围内。
 # 可以保证row 是序列 0...len(row)-1 的一个全排列。
 
+# Hard
+
 from typing import List
 # @lc code=start
 

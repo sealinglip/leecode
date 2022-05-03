@@ -22,6 +22,8 @@
 # 1 <= s.length <= 100
 # s 由小写英文字母组成
 
+# Hard
+
 # @lc code=start
 class Solution:
     def strangePrinter(self, s: str) -> int:

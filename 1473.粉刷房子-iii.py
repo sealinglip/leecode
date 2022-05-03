@@ -44,6 +44,8 @@
 # 0 <= houses[i] <= n
 # 1 <= cost[i][j] <= 10 ^ 4
 
+# Hard
+
 from typing import List
 # @lc code=start
 

@@ -31,6 +31,8 @@
 # 1 <= courses.length <= 10^4
 # 1 <= durationi, lastDayi <= 10^4
 
+# Hard
+
 from typing import List
 # @lc code=start
 import heapq

@@ -32,6 +32,7 @@
 # 1 <= steps <= 500
 # 1 <= arrLen <= 10 ^ 6
 
+# Hard
 
 # @lc code=start
 class Solution:

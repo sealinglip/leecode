@@ -24,6 +24,8 @@
 # 提示：
 # 0 <= num <= 2^31 - 1
 
+# Hard
+
 # @lc code=start
 class Solution:
     def numberToWords(self, num: int) -> str:

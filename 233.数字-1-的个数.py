@@ -16,6 +16,7 @@
 # 提示：
 # 0 <= n <= 2 * 10^9
 
+# Hard
 
 # @lc code=start
 class Solution:

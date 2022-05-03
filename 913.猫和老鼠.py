@@ -41,6 +41,7 @@
 # graph[i] 互不相同
 # 猫和老鼠在游戏中总是移动
 
+# Hard
 
 from typing import List
 # @lc code=start

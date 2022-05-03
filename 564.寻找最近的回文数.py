@@ -24,6 +24,7 @@
 # n 不含前导 0
 # n 代表在[1, 1018 - 1] 范围内的整数
 
+# Hard
 
 # @lc code=start
 class Solution:

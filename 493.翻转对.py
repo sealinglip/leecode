@@ -18,8 +18,12 @@
 # 给定数组的长度不会超过50000。
 # 输入数组中的所有数字都在32位整数的表示范围内。
 
+# Hard
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def findReversePairs(self, nums, left, right):
         res = 0
@@ -29,7 +33,7 @@ class Solution:
         j = mid + 1
         for i in range(left, mid + 1):
             while j <= right and nums[i] > 2 * nums[j]:
-                res += mid - i + 1 # j和[i, mid] 之间的数都可以组成重要翻转对
+                res += mid - i + 1  # j和[i, mid] 之间的数都可以组成重要翻转对
                 j += 1
         return res
 
@@ -39,8 +43,8 @@ class Solution:
 
         mid = (l + r) >> 1
         res = self.mergeSort(nums, sorted, l, mid) + \
-                self.mergeSort(nums, sorted, mid + 1, r) + \
-                self.findReversePairs(nums, l, r)
+            self.mergeSort(nums, sorted, mid + 1, r) + \
+            self.findReversePairs(nums, l, r)
 
         # 将[l, r]之间的元素归并排序
         i, j, k = l, mid + 1, l
@@ -52,7 +56,7 @@ class Solution:
                 sorted[k] = nums[j]
                 j += 1
             k += 1
-        
+
         while i <= mid:
             sorted[k] = nums[i]
             i += 1
@@ -73,11 +77,12 @@ class Solution:
 
         sorted = [0 for n in nums]
         return self.mergeSort(nums, sorted, 0, len(nums) - 1)
-        
+
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.reversePairs([1,2,3,4,5]))
-    print(solution.reversePairs([1,3,2,3,1]))
-    print(solution.reversePairs([2,4,3,5,1]))
+    print(solution.reversePairs([1, 2, 3, 4, 5]))
+    print(solution.reversePairs([1, 3, 2, 3, 1]))
+    print(solution.reversePairs([2, 4, 3, 5, 1]))

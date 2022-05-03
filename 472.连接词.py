@@ -25,6 +25,8 @@
 # words[i] 仅由小写字母组成
 # 0 <= sum(words[i].length) <= 10^5
 
+# Hard
+
 from typing import List
 # @lc code=start
 

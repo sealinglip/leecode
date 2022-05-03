@@ -30,8 +30,8 @@ LastEditTime: 2020-09-22 23:55:04
 #         0
 #        /
 #     Camera
-#      /  
-#     0    
+#      /
+#     0
 #    /
 # Camera
 #     \
@@ -45,6 +45,8 @@ LastEditTime: 2020-09-22 23:55:04
 # 给定树的节点数的范围是[1, 1000]。
 # 每个节点的值都是 0。
 
+# Hard
+
 from treenode import TreeNode
 # @lc code=start
 # Definition for a binary tree node.
@@ -53,6 +55,7 @@ from treenode import TreeNode
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
 
 class Solution:
     def minCameraCover(self, root: TreeNode) -> int:
@@ -108,27 +111,29 @@ class Solution:
         #         else:
         #             node.val = min(minCC(node, True), minCC(node, False))
         #     return node.val
-        
+
         # return getMinCC(root)
 
         minRequirement = 0
+
         def dfs(node: TreeNode) -> int:
             if node is None:
-                return -1 # no need
+                return -1  # no need
             left = dfs(node.left)
             right = dfs(node.right)
             if left == 0 or right == 0:
                 nonlocal minRequirement
                 minRequirement += 1
-                return 1 # has camera
+                return 1  # has camera
             elif left == 1 or right == 1:
-                return -1 # no need
-            return 0 # cover by parent
+                return -1  # no need
+            return 0  # cover by parent
 
         if dfs(root) == 0:
-            minRequirement += 1 
+            minRequirement += 1
         return minRequirement
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

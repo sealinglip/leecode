@@ -44,6 +44,8 @@
 # 上述思路有问题，有A的串，在去掉A之后不一定是符合条件2的串（比如A恰好在L中间）
 #
 
+# Hard
+
 # @lc code=start
 class Solution:
     def checkRecord(self, n: int) -> int:

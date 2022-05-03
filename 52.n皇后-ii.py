@@ -36,7 +36,9 @@ LastEditTime: 2020-09-01 09:01:23
 # 提示：
 # 皇后，是国际象棋中的棋子，意味着国王的妻子。皇后只做一件事，那就是“吃子”。
 # 当她遇见可以吃的棋子时，就迅速冲上去吃掉棋子。当然，她横、竖、斜都可走一或 N-1 步，可进可退。
+# 1 <= n <= 9
 
+# Hard
 # @lc code=start
 class Solution:
     def totalNQueens(self, n: int) -> int:

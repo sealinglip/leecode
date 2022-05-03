@@ -27,11 +27,15 @@ LastEditTime: 2020-09-21 09:00:06
 # 输出: 1
 
 # 提示：
+# 1 <= nums.length <= 5 * 10^5
+# -2^31 <= nums[i] <= 2^31 - 1
 # 你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。
-
+# Hard
 from typing import List
 
 # @lc code=start
+
+
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         if not nums or 1 not in nums:
@@ -59,6 +63,7 @@ class Solution:
 
         return n if nums[0] > 0 else n + 1
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

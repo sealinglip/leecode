@@ -23,6 +23,8 @@
 # 1 <= A[i] <= A.length
 # 1 <= K <= A.length
 
+# Hard
+
 from typing import List
 # @lc code=start
 

@@ -40,6 +40,8 @@
 # -10^4 <= nums[i] <= 10^4
 # 1 <= k <= nums.length
 
+# Hard
+
 from typing import List
 import heapq
 # @lc code=start

@@ -57,6 +57,13 @@ LastEditTime: 2020-09-21 23:28:06
 # 输入: s1 = "abcde", s2 = "caebd"
 # 输出: false
 
+# 提示：
+# s1.length == s2.length
+# 1 <= s1.length <= 30
+# s1 和 s2 由小写英文字母组成
+
+# Hard
+
 from functools import cache
 # @lc code=start
 from collections import Counter

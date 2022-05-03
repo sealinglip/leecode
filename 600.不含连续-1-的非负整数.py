@@ -15,7 +15,6 @@ LastEditTime: 2021-09-11 22:58:39
 # 给定一个正整数 n，找出小于或等于 n 的非负整数中，其二进制表示不包含 连续的1 的个数。
 
 # 示例 1:
-
 # 输入: 5
 # 输出: 5
 # 解释:
@@ -29,7 +28,11 @@ LastEditTime: 2021-09-11 22:58:39
 # 其中，只有整数3违反规则（有两个连续的1），其他5个满足规则。
 # 说明: 1 <= n <= 10^9
 
+# Hard
+
 # @lc code=start
+
+
 class Solution:
     def findIntegers(self, n: int) -> int:
         # 先判断n是2的几次方到几次方之间
@@ -38,7 +41,7 @@ class Solution:
         dp[1] = 1
         for i in range(2, 31):
             dp[i] = dp[i - 1] + dp[i - 2]
-            
+
         res = 0
         pre = 0
         # n从高位开始判断
@@ -47,7 +50,7 @@ class Solution:
                 res += dp[i + 1]
                 if pre == 1:
                     break
-                pre = 1 # 记录本位
+                pre = 1  # 记录本位
             else:
                 pre = 0
 
@@ -56,7 +59,8 @@ class Solution:
         return res
 # @lc code=end
 
+
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.findIntegers(5)) # 5
-    print(solution.findIntegers(7)) # 5
+    print(solution.findIntegers(5))  # 5
+    print(solution.findIntegers(7))  # 5

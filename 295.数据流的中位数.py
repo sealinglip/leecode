@@ -25,8 +25,9 @@
 # 如果数据流中所有整数都在 0 到 100 范围内，你将如何优化你的算法？
 # 如果数据流中 99 % 的整数都在 0 到 100 范围内，你将如何优化你的算法？
 
+# Hard
+
 # @lc code=start
-# from bisect import bisect, insort
 import heapq
 
 

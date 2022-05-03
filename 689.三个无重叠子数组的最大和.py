@@ -23,6 +23,7 @@
 # 1 <= nums[i] < 2^16
 # 1 <= k <= floor(nums.length / 3)
 
+# Hard
 
 from typing import List
 # @lc code=start

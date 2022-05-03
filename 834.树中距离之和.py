@@ -26,33 +26,37 @@ LastEditTime: 2020-10-08 22:11:57
 # 1   2
 #    /|\
 #   3 4 5
-# 我们可以计算出 dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + dist(0,5) 
+# 我们可以计算出 dist(0,1) + dist(0,2) + dist(0,3) + dist(0,4) + dist(0,5)
 # 也就是 1 + 1 + 2 + 2 + 2 = 8。 因此，answer[0] = 8，以此类推。
 # 说明: 1 <= N <= 10000
 
+# Hard
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def sumOfDistancesInTree(self, N: int, edges: List[List[int]]) -> List[int]:
         if not N:
             return []
-        
+
         # 先记录每个节点的连通情况
         tree = [[] for _ in range(N)]
         for n1, n2 in edges:
             tree[n1].append(n2)
             tree[n2].append(n1)
-        depth = [0 for _ in range(N)] # 存储以每个节点在以0节点为根时的树深度
-        count = [0 for _ in range(N)] # 每个节点的子节点数量(含自身)
+        depth = [0 for _ in range(N)]  # 存储以每个节点在以0节点为根时的树深度
+        count = [0 for _ in range(N)]  # 每个节点的子节点数量(含自身)
 
         def dfsForDepthAndCount(node: int, parent: int):
             count[node] = 1
             for link in tree[node]:
-                if link != parent: # 不走来时路
+                if link != parent:  # 不走来时路
                     depth[link] = depth[node] + 1
                     dfsForDepthAndCount(link, node)
                     count[node] += count[link]
-        
+
         dfsForDepthAndCount(0, -1)
 
         answer = [0 for _ in range(N)]
@@ -63,14 +67,14 @@ class Solution:
                 if link != parent:
                     # 当出发点从node转移到link时，link下所有子节点（含自身）距离都缩短了1，而其他所有节点距离都增加了1
                     # answer[link] = answer[node] - count[link] + (N - count[link])
-                    answer[link] = answer[node] - 2 * count[link] + N 
+                    answer[link] = answer[node] - 2 * count[link] + N
                     dfsForAnswer(link, node)
 
         dfsForAnswer(0, -1)
 
         return answer
 
-        
+
 # @lc code=end
 
 if __name__ == "__main__":

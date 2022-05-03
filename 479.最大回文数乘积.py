@@ -19,6 +19,8 @@
 # 提示:
 # 1 <= n <= 8
 
+# Hard
+
 # @lc code=start
 from math import ceil, sqrt
 

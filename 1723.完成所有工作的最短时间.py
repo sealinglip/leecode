@@ -25,6 +25,7 @@
 # 提示：
 # 1 <= k <= jobs.length <= 12
 # 1 <= jobs[i] <= 10^7
+# Hard
 
 from typing import List
 # @lc code=start

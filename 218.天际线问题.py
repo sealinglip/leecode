@@ -39,6 +39,8 @@ LastEditTime: 2021-07-13 22:34:50
 # 1 <= heighti <= 2^31 - 1
 # buildings 按 lefti 非递减排序
 
+# Hard
+# 复习
 
 from typing import List
 # @lc code=start

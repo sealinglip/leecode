@@ -64,8 +64,11 @@ LastEditTime: 2020-09-04 10:09:27
 #     "do                  "
 # ]
 
+# Hard
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
         if not words:
@@ -81,7 +84,7 @@ class Solution:
             '''
             if end - start == 1:
                 return words[start] + " " * space
-                
+
             avggap = round(space / (end - start - 1))
             delta = space - avggap * (end - start - 1)
             gap = [avggap] * (end - start - 1)
@@ -111,7 +114,8 @@ class Solution:
                     accumulate -= wordLen + 1
                 else:
                     end = i + 1
-                res.append(generateLine(start, end, maxWidth - accumulate + end - start - 1))
+                res.append(generateLine(start, end, maxWidth -
+                                        accumulate + end - start - 1))
                 start = end
                 i = end
                 accumulate = -1

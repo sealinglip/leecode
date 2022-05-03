@@ -37,6 +37,7 @@
 # 图中两个节点之间可能有多条路径。
 # 图中不含有自环。
 
+# Hard
 from typing import List
 # @lc code=start
 from collections import defaultdict

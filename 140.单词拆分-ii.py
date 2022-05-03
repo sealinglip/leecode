@@ -45,15 +45,25 @@ LastEditTime: 2020-11-01 00:16:29
 # 输出:
 # []
 
+# 提示：
+# 1 <= s.length <= 20
+# 1 <= wordDict.length <= 1000
+# 1 <= wordDict[i].length <= 10
+# s 和 wordDict[i] 仅有小写英文字母组成
+# wordDict 中所有字符串都 不同
+
+# Hard
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         tmp = set("".join(wordDict))
         # 判断字符串中是否有字典中不包含的字符
         if any([i not in tmp for i in s]):
             return []
-            
+
         w_cnt = len(wordDict)
         s_len = len(s)
         dp = [[""]]  # dp[i] 代表s的前i个字符划分成单词的所有方式
@@ -62,8 +72,9 @@ class Solution:
             # 注意这里的列表推导式用法
             dp.append([split + (" " if split else "") +
                        s[j:i] for j in range(i) if (s[j:i] in wordDict and dp[j]) for split in dp[j]])
-                    
+
         return dp[s_len]
+
 
 # @lc code=end
 if __name__ == "__main__":

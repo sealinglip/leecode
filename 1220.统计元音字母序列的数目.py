@@ -32,6 +32,7 @@
 # 提示：
 # 1 <= n <= 2 * 10 ^ 4
 
+# Hard
 
 # @lc code=start
 class Solution:

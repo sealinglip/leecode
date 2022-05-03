@@ -35,16 +35,23 @@ LastEditTime: 2020-09-05 22:28:03
 # 输入: n = 4, k = 9
 # 输出: "2314"
 
+# 提示：
+# 1 <= n <= 9
+# 1 <= k <= n!
+
+# Hard
 # @lc code=start
+
+
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
         # n位数，固定前几位，后面的m位数字共有m!种可能
         rank = [1] * n
         for i in range(1, n):
             rank[i] = rank[i - 1] * i
-        rank = rank[::-1] # 倒转数组
-            
-        used = [False] * n # 数字已使用情况
+        rank = rank[::-1]  # 倒转数组
+
+        used = [False] * n  # 数字已使用情况
 
         def getNthDigit(nth: int) -> str:
             '''
@@ -59,10 +66,10 @@ class Solution:
                         return str(i + 1)
                 i += 1
             else:
-                return "" # 不应该到这
+                return ""  # 不应该到这
 
         digits = []
-        k -= 1 # 换成以0为基
+        k -= 1  # 换成以0为基
         for i in range(n):
             if k < rank[i]:
                 digits.append(getNthDigit(0))
@@ -72,8 +79,9 @@ class Solution:
                 k -= nth * rank[i]
 
         return "".join(digits)
-        
+
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

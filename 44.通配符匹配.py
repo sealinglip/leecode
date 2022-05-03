@@ -57,17 +57,21 @@
 # 输出: false
 #
 
+# Hard
 # @lc code=start
+
+
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
-        cache = {} # 缓存结果
+        cache = {}  # 缓存结果
+
         def match(txt: str, ti: int, pa: str, pi: int) -> bool:
             if ti == len(txt):
                 if pi == len(pa):
                     return True
                 elif pa[pi] == '*':
                     while pi + 1 < len(pa) and pa[pi + 1] == '*':
-                        pi += 1 
+                        pi += 1
                     return match(txt, ti, pa, pi + 1)
                 else:
                     return False
@@ -91,7 +95,7 @@ class Solution:
                     i -= 1
             elif pa[pi] == '?' or pa[pi] == txt[ti]:
                 m = match(txt, ti + 1, pa, pi + 1)
-                
+
             cache[key] = m
             return m
         return match(s, 0, p, 0)

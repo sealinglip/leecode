@@ -53,6 +53,7 @@
 # 1 <= arrival[i], load[i] <= 10^9
 # arrival 保证 严格递增 。
 
+# Hard
 
 from typing import List
 # @lc code=start

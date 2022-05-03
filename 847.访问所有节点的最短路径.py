@@ -25,6 +25,8 @@
 # 如果 graph[a] 包含 b ，那么 graph[b] 也包含 a
 # 输入的图总是连通图
 
+# Hard
+
 from typing import List
 # @lc code=start
 from collections import deque

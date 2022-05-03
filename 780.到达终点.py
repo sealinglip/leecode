@@ -29,6 +29,7 @@
 # 提示:
 # 1 <= sx, sy, tx, ty <= 10^9
 
+# Hard
 # 复习，此题逻辑很简单，就是容易TLE
 # @lc code=start
 class Solution:

@@ -27,6 +27,8 @@
 # queries[i].length == 2
 # 0 <= nums[j], xi, mi <= 10^9
 
+# Hard
+
 from typing import List
 # @lc code=start
 

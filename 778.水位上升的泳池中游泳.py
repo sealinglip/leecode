@@ -36,6 +36,8 @@
 # 2 <= N <= 50.
 # grid[i][j] 是[0, ..., N*N - 1] 的排列。
 
+# Hard
+
 from typing import List
 # @lc code=start
 # 并查集

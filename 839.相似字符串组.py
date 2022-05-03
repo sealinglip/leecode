@@ -28,6 +28,8 @@
 # 备注：
 # 字母异位词（anagram），一种把某个字符串的字母的位置（顺序）加以改换所形成的新词。
 
+# Hard
+
 from typing import List
 # @lc code=start
 # 并查集

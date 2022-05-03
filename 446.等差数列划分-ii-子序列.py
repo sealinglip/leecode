@@ -34,9 +34,10 @@
 
 
 # 提示：
-
 # 1 <= nums.length <= 1000
 # -2^31 <= nums[i] <= 2^31 - 1
+
+# Hard
 
 from typing import List
 from collections import defaultdict

@@ -33,6 +33,8 @@
 # 1 <= nums.length <= 10^5
 # 0 <= nums[i] < nums.length
 
+# Hard
+
 from typing import List
 
 

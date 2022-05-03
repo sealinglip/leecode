@@ -43,9 +43,21 @@ LastEditTime: 2020-11-05 08:31:02
 # 输出: []
 # 解释: endWord "cog" 不在字典中，所以不存在符合要求的转换序列。
 
+# 提示：
+# 1 <= beginWord.length <= 5
+# endWord.length == beginWord.length
+# 1 <= wordList.length <= 5000
+# wordList[i].length == beginWord.length
+# beginWord、endWord 和 wordList[i] 由小写英文字母组成
+# beginWord != endWord
+# wordList 中的所有单词 互不相同
+
+# Hard
 from typing import List
 # @lc code=start
 from collections import defaultdict, deque
+
+
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         wordLen = len(beginWord)
@@ -80,4 +92,3 @@ class Solution:
         else:
             return []
 # @lc code=end
-

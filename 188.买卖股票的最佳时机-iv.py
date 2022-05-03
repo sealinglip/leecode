@@ -23,6 +23,7 @@
 # 0 <= prices.length <= 1000
 # 0 <= prices[i] <= 1000
 
+# Hard
 from typing import List
 # @lc code=start
 

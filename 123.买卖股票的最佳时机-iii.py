@@ -34,8 +34,20 @@ LastEditTime: 2020-10-18 09:20:43
 # 输出: 0
 # 解释: 在这个情况下, 没有交易完成, 所以最大利润为 0。
 
+# 示例 4：
+# 输入：prices = [1]
+# 输出：0
+
+
+# 提示：
+# 1 <= prices.length <= 10^5
+# 0 <= prices[i] <= 10^5
+
+# Hard
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
@@ -44,20 +56,22 @@ class Solution:
         # 每天的操作之后的状态只有五种情况：0 没有交易，持有股票，1 已经发生一次交易，不持有股票，
         # 2 已经发生一次交易，持有股票，3 已经发生两次交易，4 没有交易，不持有股票（这种情况其实不需要考虑）
         # 设dp(i)[j]为第i天第j种情况下的最大交易
-        # 
+        #
         # dp(i)[0] = max(dp(i-1)[0], -prices[i])  0 < i < len(prices)
         # dp(i)[1] = max(dp(i-1)[1], dp(i)[0] + prices[i])  0 < i < len(prices)
         # dp(i)[2] = max(dp(i-1)[2], dp(i-1)[1] - prices[i])  0 < i < len(prices)
         # dp(i)[3] = max(dp(i-1)[3], dp(i-1)[2] + prices[i])  0 < i < len(prices)
-        # dp(i)[4] = 0  0 < i < len(prices) 
+        # dp(i)[4] = 0  0 < i < len(prices)
         # dp(i) = [-prices[0], -inf, -inf, -inf] i == 0 后三种情况不存在，所以设为负无穷大
         dp = [-float('inf')] * 4
         dp[0] = -prices[0]
         for p in prices[1:]:
-            dp = [max(dp[0], -p), max(dp[1], dp[0] + p), max(dp[2], dp[1] - p), max(dp[3], dp[2] + p)]
+            dp = [max(dp[0], -p), max(dp[1], dp[0] + p),
+                  max(dp[2], dp[1] - p), max(dp[3], dp[2] + p)]
 
-        return max(*dp, 0) # 0代表第四种情况
+        return max(*dp, 0)  # 0代表第四种情况
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

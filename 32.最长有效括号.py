@@ -12,7 +12,31 @@
 #
 # [32] 最长有效括号
 #
+# 给你一个只包含 '(' 和 ')' 的字符串，找出最长有效（格式正确且连续）括号子串的长度。
 
+
+# 示例 1：
+
+# 输入：s = "(()"
+# 输出：2
+# 解释：最长有效括号子串是 "()"
+# 示例 2：
+
+# 输入：s = ")()())"
+# 输出：4
+# 解释：最长有效括号子串是 "()()"
+# 示例 3：
+
+# 输入：s = ""
+# 输出：0
+
+
+# 提示：
+
+# 0 <= s.length <= 3 * 10^4
+# s[i] 为 '(' 或 ')'
+
+# Hard
 # @lc code=start
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
@@ -24,7 +48,7 @@ class Solution:
         if not s:
             return 0
 
-        delta, deltaMap, maxLen = 0, {0: -1}, 0 # 记录偏差值、偏差值对照表、当前最大子串长度
+        delta, deltaMap, maxLen = 0, {0: -1}, 0  # 记录偏差值、偏差值对照表、当前最大子串长度
         for i, c in enumerate(s):
             if c == '(':
                 delta += 1
@@ -34,7 +58,7 @@ class Solution:
             keyToRemove = [k for k in deltaMap.keys() if k > delta]
             for k in keyToRemove:
                 del deltaMap[k]
-                
+
             if delta in deltaMap:
                 l = i - deltaMap[delta]
                 if l > maxLen:
@@ -44,6 +68,7 @@ class Solution:
 
         return maxLen
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

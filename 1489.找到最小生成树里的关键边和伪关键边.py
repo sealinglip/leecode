@@ -28,6 +28,7 @@
 # 1 <= weighti <= 1000
 # 所有(fromi, toi) 数对都是互不相同的。
 
+# Hard
 
 from typing import List
 # @lc code=start

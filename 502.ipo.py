@@ -33,6 +33,8 @@
 # 0 <= profits[i] <= 10^4
 # 0 <= capital[i] <= 10^9
 
+# Hard
+
 from typing import List
 # @lc code=start
 from heapq import nlargest, heappush, heappop

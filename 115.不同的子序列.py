@@ -50,16 +50,23 @@ LastEditTime: 2020-10-05 08:32:08
 # babgbag
 #     ^^^
 
+# 提示：
+# 0 <= s.length, t.length <= 1000
+# s 和 t 由英文字母组成
+
+# Hard
 # @lc code=start
+
+
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         if not s or not t or len(s) < len(t):
             return 0
 
         ls, lt = len(s), len(t)
-        if ls == lt: # s和t长度相同，则判断是否相等
+        if ls == lt:  # s和t长度相同，则判断是否相等
             return int(s == t)
-        
+
         # 记dp(i, j)为s[:i]变化为t[:j]的方法个数, 0 <= i <= ls, 0 <= j <= lt
         # dp(i, j) = dp(i-1, j) if s[i-1] != t[j-1]
         #          = dp(i-1, j-1) + dp(i-1, j) if s[i-1] = t[j-1]
@@ -73,9 +80,10 @@ class Solution:
                 if s[i] == t[j]:
                     dp[j+1] = dp[j] + dp[j+1]
 
-        return dp[-1] 
+        return dp[-1]
 
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

@@ -21,6 +21,8 @@
 # 1 <= N <= 1000
 # 0 <= nums[i] <= 2^16
 
+# Hard
+
 from typing import List
 # @lc code=start
 from functools import reduce

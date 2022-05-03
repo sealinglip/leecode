@@ -34,7 +34,9 @@
 # rectangles[i].length == 4
 # -10^5 <= xi, yi, ai, bi <= 10^5
 
-from typing import List, Tuple
+# Hard
+
+from typing import List
 # @lc code=start
 from collections import defaultdict
 

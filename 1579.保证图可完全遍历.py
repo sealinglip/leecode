@@ -44,6 +44,8 @@ LastEditTime: 2021-01-27 23:21:37
 # 1 <= edges[i][1] < edges[i][2] <= n
 # 所有元组(typei, ui, vi) 互不相同
 
+# Hard
+
 from typing import List
 # @lc code=start
 import copy
@@ -87,7 +89,7 @@ class Solution:
             if t == 3:
                 if not ufa.union(u, v):
                     res += 1
-        
+
         ufb = copy.deepcopy(ufa) # 克隆一份
         # 处理独占边
         for t, u, v in edges:

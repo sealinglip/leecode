@@ -42,10 +42,12 @@
 # 树中结点数目总数在范围 [1, 1000] 内
 # 0 <= Node.val <= 1000
 
+# Hard
+
 from treenode import TreeNode
 from typing import List
-from collections import defaultdict, deque
 # @lc code=start
+from collections import defaultdict, deque
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):

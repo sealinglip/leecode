@@ -31,7 +31,6 @@
 
 
 # 提示：
-
 # 1 <= n <= 10^9
 # 0 <= lamps.length <= 20000
 # 0 <= queries.length <= 20000
@@ -40,6 +39,7 @@
 # queries[j].length == 2
 # 0 <= rowj, colj < n
 
+# Hard
 
 from typing import List
 # @lc code=start

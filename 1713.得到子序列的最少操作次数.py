@@ -24,6 +24,8 @@
 # 1 <= target[i], arr[i] <= 10^9
 # target 不包含任何重复元素。
 
+# Hard
+
 from typing import List
 # @lc code=start
 from bisect import bisect_left

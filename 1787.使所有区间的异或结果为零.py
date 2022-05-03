@@ -24,6 +24,7 @@
 # 提示：
 # 1 <= k <= nums.length <= 2000
 # ​​​​​​0 <= nums[i] < 2^10
+# Hard
 
 from typing import List
 # @lc code=start

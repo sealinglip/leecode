@@ -12,26 +12,49 @@ LastEditTime: 2020-09-20 20:33:18
 #
 # [85] 最大矩形
 #
-# 给定一个仅包含 0 和 1 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
+# 给定一个仅包含 0 和 1 、大小为 rows x cols 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
 
-# 示例:
-# 输入:
-# [
-#     ["1", "0", "1", "0", "0"],
-#     ["1", "0", "1", "1", "1"],
-#     ["1", "1", "1", "1", "1"],
-#     ["1", "0", "0", "1", "0"]
-# ]
-# 输出: 6
+
+# 示例 1：
+# 输入：matrix = [["1", "0", "1", "0", "0"], ["1", "0", "1", "1", "1"], ["1", "1", "1", "1", "1"], ["1", "0", "0", "1", "0"]]
+# 输出：6
+# 解释：最大矩形如上图所示。
+
+# 示例 2：
+# 输入：matrix = []
+# 输出：0
+
+# 示例 3：
+# 输入：matrix = [["0"]]
+# 输出：0
+
+# 示例 4：
+# 输入：matrix = [["1"]]
+# 输出：1
+
+# 示例 5：
+# 输入：matrix = [["0", "0"]]
+# 输出：0
+
+
+# 提示：
+# rows == matrix.length
+# cols == matrix[0].length
+# 1 <= row, cols <= 200
+# matrix[i][j] 为 '0' 或 '1'
+
 # 依赖84题的解法
+# Hard
 
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         if not matrix or not matrix[0]:
             return 0
-        
+
         def largestRectangleArea(heights: List[int]) -> int:
             if not heights:
                 return 0
@@ -63,14 +86,16 @@ class Solution:
         maximal = 0
         for col in range(M):
             for row in range(N):
-                lengths[row] = lengths[row] + 1 if matrix[row][col] == '1' else 0
+                lengths[row] = lengths[row] + \
+                    1 if matrix[row][col] == '1' else 0
             largest = largestRectangleArea(lengths)
             if largest > maximal:
                 maximal = largest
-            
+
         return maximal
 
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
@@ -80,4 +105,3 @@ if __name__ == "__main__":
         ["1", "1", "1", "1", "1"],
         ["1", "0", "0", "1", "0"]
     ]))
-

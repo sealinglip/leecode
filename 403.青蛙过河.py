@@ -38,6 +38,8 @@ LastEditTime: 2020-09-10 09:29:23
 # 返回 false。青蛙没有办法过河。
 # 这是因为第5和第6个石子之间的间距太大，没有可选的方案供青蛙跳跃过去。
 
+# Hard
+
 from typing import List
 # @lc code=start
 from collections import defaultdict

@@ -28,6 +28,8 @@
 # profit.length == group.length
 # 0 <= profit[i] <= 100
 
+# Hard
+
 from typing import List
 # @lc code=start
 

@@ -24,6 +24,8 @@
 
 # 进阶：如果行数远大于列数，该如何设计解决方案？
 
+# Hard
+
 from typing import List
 # @lc code=start
 from sortedcontainers import SortedList

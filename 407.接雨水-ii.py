@@ -23,6 +23,8 @@
 # 1 <= m, n <= 200
 # 0 <= heightMap[i][j] <= 2 * 10^4
 
+# Hard
+
 from typing import List
 # @lc code=start
 import heapq

@@ -39,6 +39,7 @@
 # 1 <= nums.length <= 10^5
 # 1 <= nums[i] <= 30
 
+# Hard
 from typing import List
 # @lc code=start
 

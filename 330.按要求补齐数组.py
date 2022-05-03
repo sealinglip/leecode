@@ -23,6 +23,14 @@
 # 输入: nums = [1, 2, 2], n = 5
 # 输出: 0
 
+# 提示：
+# 1 <= nums.length <= 1000
+# 1 <= nums[i] <= 10^4
+# nums 按 升序排列
+# 1 <= n <= 2^31 - 1
+
+# Hard
+
 from typing import List
 # @lc code=start
 

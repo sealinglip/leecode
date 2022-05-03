@@ -26,6 +26,7 @@
 # 所有树的坐标都是不同的。
 # 输入的点没有顺序。输出顺序也没有要求。
 
+# Hard
 # 复习
 from typing import List
 # @lc code=start

@@ -31,6 +31,8 @@
 # arr 中的所有数字 互不相同 ，且按 严格递增 排序
 # 1 <= k <= arr.length * (arr.length - 1) / 2
 
+# Hard
+
 
 from typing import List
 # @lc code=start

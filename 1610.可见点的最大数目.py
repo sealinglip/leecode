@@ -34,6 +34,9 @@
 # 0 <= angle < 360
 # 0 <= posx, posy, xi, yi <= 100
 
+# Hard
+
+
 from typing import List
 # @lc code=start
 import math

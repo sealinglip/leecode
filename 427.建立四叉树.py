@@ -101,13 +101,43 @@ class Solution:
     def construct(self, grid: List[List[int]]) -> 'Node':
         n = len(grid)
 
+        # 方法1
+        # def build(x: int, y: int, width: int, height: int) -> 'Node':
+        #     '''
+        #     x, y, width, height：区域的起点坐标和宽、高
+        #     '''
+        #     # 分治，构造四个区域的节点
+        #     if width == 1:
+        #         return Node(grid[y][x], True, None, None, None, None)
+        #     else:
+        #         halfWidth, halfHeight = width >> 1, height >> 1
+        #         topLeft = build(x, y, halfWidth, halfHeight)
+        #         topRight = build(x + halfWidth, y, halfWidth, halfHeight)
+        #         bottomLeft = build(x, y + halfHeight, halfWidth, halfHeight)
+        #         bottomRight = build(x + halfWidth, y +
+        #                             halfHeight, halfWidth, halfHeight)
+        #         isLeaf = all([topLeft.isLeaf, topRight.isLeaf, bottomLeft.isLeaf, bottomRight.isLeaf]) \
+        #             and (topLeft.val == topRight.val) and (bottomLeft.val == bottomRight.val) and (topLeft.val == bottomLeft.val)
+        #         if isLeaf:
+        #             return Node(topLeft.val, isLeaf, None, None, None, None)
+        #         else:
+        #             return Node(0, isLeaf, topLeft, topRight, bottomLeft, bottomRight)
+
+        # 方法2
+        # 构造前缀和
+        preSum = [[0] * (n + 1) for _ in range(n + 1)]
+        for i in range(1, n + 1):
+            for j in range(1, n + 1):
+                preSum[i][j] = preSum[i-1][j] + preSum[i][j-1] - \
+                    preSum[i-1][j-1] + grid[i-1][j-1]
+
+        def getSum(x: int, y: int, width: int, height: int) -> int:
+            return preSum[y+height][x+width] + preSum[y][x] - preSum[y][x+width] - preSum[y+height][x]
+
         def build(x: int, y: int, width: int, height: int) -> 'Node':
-            '''
-            x, y, width, height
-            '''
-            # 分治，构造四个区域的节点
-            if width == 1:
-                return Node(grid[y][x], True, None, None, None, None)
+            areaSum = getSum(x, y, width, height)
+            if areaSum == 0 or areaSum == width * height:
+                return Node(1 if areaSum else 0, True, None, None, None, None)
             else:
                 halfWidth, halfHeight = width >> 1, height >> 1
                 topLeft = build(x, y, halfWidth, halfHeight)
@@ -115,18 +145,17 @@ class Solution:
                 bottomLeft = build(x, y + halfHeight, halfWidth, halfHeight)
                 bottomRight = build(x + halfWidth, y +
                                     halfHeight, halfWidth, halfHeight)
-                isLeaf = all([topLeft.isLeaf, topRight.isLeaf, bottomLeft.isLeaf, bottomRight.isLeaf]) \
-                    and (topLeft.val == topRight.val) and (bottomLeft.val == bottomRight.val) and (topLeft.val == bottomLeft.val)
-                if isLeaf:
-                    return Node(topLeft.val, isLeaf, None, None, None, None)
-                else:
-                    return Node(0, isLeaf, topLeft, topRight, bottomLeft, bottomRight)
+                return Node(0, False, topLeft, topRight, bottomLeft, bottomRight)
 
-        return build(0, 0, n, n)
+        node = build(0, 0, n, n)
+        return node
+
 
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
+    print(solution.construct([[1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [
+          1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0]]))
     # [[0,1],[1,0],[1,1],[1,1],[1,0]]
     print(solution.construct([[0, 1], [1, 0]]))
     print(solution.construct([[1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [

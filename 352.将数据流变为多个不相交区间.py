@@ -52,6 +52,8 @@
 
 # 进阶：如果存在大量合并，并且与数据流的大小相比，不相交区间的数量很小，该怎么办?
 
+# Hard
+
 from typing import List
 # @lc code=start
 from sortedcontainers import SortedDict

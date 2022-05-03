@@ -17,15 +17,19 @@
 # nums2 = [3, 4]
 # 则中位数是(2 + 3)/2 = 2.5
 
+# Hard
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         totalLen = len(nums1) + len(nums2)
         if not totalLen:
             return 0
 
-        half, odd, idx1, idx2, idx, curVal, readVal = (totalLen >> 1), totalLen & 1, 0, 0, 0, None, None # 中位索引、总数是否单、数组1索引、数组2索引、总索引、当前值，读入值
+        half, odd, idx1, idx2, idx, curVal, readVal = (
+            totalLen >> 1), totalLen & 1, 0, 0, 0, None, None  # 中位索引、总数是否单、数组1索引、数组2索引、总索引、当前值，读入值
 
         while idx1 < len(nums1) and idx2 < len(nums2):
             if nums1[idx1] < nums2[idx2]:
@@ -45,7 +49,7 @@ class Solution:
             else:
                 readVal = nums2[idx2]
                 idx2 += 1
-            
+
             idx += 1
             if idx > half:
                 if odd:
@@ -54,21 +58,22 @@ class Solution:
                     return (curVal + readVal) / 2
             curVal = readVal
 
-        nums = nums1 if idx1 < len(nums1) else nums2 # nums指向还有剩余元素的数组
+        nums = nums1 if idx1 < len(nums1) else nums2  # nums指向还有剩余元素的数组
         idx3 = half - idx + (idx1 if idx1 < len(nums1) else idx2)
 
         readVal = nums[idx3]
         if half > idx:
             curVal = nums[idx3 - 1]
-            
+
         if odd:
             return readVal
         else:
             return (curVal + readVal) / 2
-        
+
         return curVal
-        
+
 # @lc code=end
+
 
 if __name__ == '__main__':
     solution = Solution()

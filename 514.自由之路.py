@@ -34,13 +34,17 @@ LastEditTime: 2020-11-11 10:13:32
 # 两个字符串中都只有小写字符，并且均可能存在重复字符；
 # 字符串 key 一定可以由字符串 ring 旋转拼出。
 
+# Hard
+
 # @lc code=start
 from collections import defaultdict
+
+
 class Solution:
     def findRotateSteps(self, ring: str, key: str) -> int:
         if not ring or not key:
             return -1
-        
+
         N = len(ring)
         M = len(key)
         # 记录字符在ring中出现的位置
@@ -57,14 +61,15 @@ class Solution:
             dp[j] = min(j, N - j) + 1
 
         for i in range(1, M):
-            newDp = dp[:] # make a copy first
+            newDp = dp[:]  # make a copy first
             for j in pos[key[i]]:
-                newDp[j] = min([dp[k] + min(abs(j - k), N - abs(j - k)) + 1 for k in pos[key[i-1]]])
+                newDp[j] = min(
+                    [dp[k] + min(abs(j - k), N - abs(j - k)) + 1 for k in pos[key[i-1]]])
             dp = newDp
 
         return min([dp[j] for j in pos[key[-1]]])
 
-        
+
 # @lc code=end
 
 if __name__ == "__main__":

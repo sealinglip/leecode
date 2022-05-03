@@ -28,9 +28,14 @@ LastEditTime: 2020-11-26 23:19:20
 # 说明:
 # 你可以假设数组中所有元素都是非负整数，且数值在 32 位有符号整数范围内。
 # 请尝试在线性时间复杂度和空间复杂度的条件下解决此问题。
+# 1 <= nums.length <= 10^5
+# 0 <= nums[i] <= 10^9
 
+# Hard
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def maximumGap(self, nums: List[int]) -> int:
         if not nums or len(nums) < 2:
@@ -61,7 +66,7 @@ class Solution:
             if n > maxbucket[idx]:
                 maxbucket[idx] = n
         prev = MAX
-        
+
         res = 0
         for i, j in zip(minbucket, maxbucket):
             if i != MAX:
@@ -71,6 +76,7 @@ class Solution:
         return res
 
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

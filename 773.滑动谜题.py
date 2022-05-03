@@ -36,6 +36,8 @@
 # board 是一个如上所述的 2 x 3 的数组.
 # board[i][j] 是一个[0, 1, 2, 3, 4, 5] 的排列.
 
+# Hard
+
 from typing import Generator, List
 from collections import deque
 # @lc code=start

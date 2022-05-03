@@ -34,9 +34,12 @@ LastEditTime: 2021-09-16 20:27:16
 # words[i] 由小写英文字母组成
 # words 中的所有字符串互不相同
 
+# Hard
 from typing import List
 # @lc code=start
 from collections import defaultdict
+
+
 class Trie:
     def __init__(self) -> None:
         self.children = defaultdict(Trie)
@@ -49,6 +52,7 @@ class Trie:
         cur.isWord = True
         cur.word = word
 
+
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
         m, n = len(board), len(board[0])
@@ -57,7 +61,8 @@ class Solution:
             trie.insert(w)
 
         res = set()
-        def dfs(node: Trie, x:int, y:int):
+
+        def dfs(node: Trie, x: int, y: int):
             if board[x][y] not in node.children:
                 return
 
@@ -71,12 +76,13 @@ class Solution:
                 if 0 <= x2 < m and 0 <= y2 < n:
                     dfs(node, x2, y2)
             board[x][y] = c
-        
+
         for i in range(m):
             for j in range(n):
                 dfs(trie, i, j)
         return list(res)
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

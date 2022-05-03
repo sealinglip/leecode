@@ -18,6 +18,7 @@
 # 提示:
 # 1 <= k <= n <= 10^9
 
+# Hard
 
 # @lc code=start
 class Solution:

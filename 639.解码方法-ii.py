@@ -48,6 +48,8 @@
 # 1 <= s.length <= 10^5
 # s[i] 是 0 - 9 中的一位数字或字符 '*'
 
+# Hard
+
 # @lc code=start
 class Solution:
     def numDecodings(self, s: str) -> int:

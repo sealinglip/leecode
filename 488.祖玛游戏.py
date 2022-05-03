@@ -65,8 +65,12 @@ LastEditTime: 2021-11-09 22:46:15
 # 1 <= hand.length <= 5
 # board 和 hand 由字符 'R'、'Y'、'B'、'G' 和 'W' 组成
 # 桌面上一开始的球中，不会有三个及三个以上颜色相同且连着的球
+
+# Hard
+
 # @lc code=start
 from functools import lru_cache
+
 
 class Solution:
     def findMinStep(self, board: str, hand: str) -> int:
@@ -88,12 +92,12 @@ class Solution:
                     return eraze(s[:slow] + s[fast:])
                 slow = fast
             return s
-        
+
         INF = float('inf')
         HLEN = len(hand)
-        
+
         @lru_cache(None)
-        def dfs(b:str, h:str) -> int:
+        def dfs(b: str, h: str) -> int:
             '''
             深度优先遍历解法
             '''
@@ -103,14 +107,15 @@ class Solution:
             elif not h:
                 # 无解的情况
                 return INF
-            
+
             r = INF
             for i in range(len(b)):
                 if i == 0 or b[i] != b[i-1]:
                     # 只在字符左边插，只插同样的字符
                     j = h.find(b[i])
                     if j != -1:
-                        r = min(r, dfs(eraze(b[:i] + h[j] + b[i:]), h[:j] + h[j+1:]))
+                        r = min(
+                            r, dfs(eraze(b[:i] + h[j] + b[i:]), h[:j] + h[j+1:]))
                 else:
                     # 在两个相同字符中间插，插不一样的字符
                     slow = 0
@@ -129,11 +134,12 @@ class Solution:
         return -1 if res == INF else res
 # @lc code=end
 
+
 if __name__ == "__main__":
     solution = Solution()
     # 下面这个用例说明这个剪枝策略不行：“只在字符左边插，只插同样的字符”
     print(solution.findMinStep("RRWWRRBBRR", "WB"))  # 2
-    print(solution.findMinStep("WRRBBW", "RB")) # -1
+    print(solution.findMinStep("WRRBBW", "RB"))  # -1
     print(solution.findMinStep("WWRRBBWW", "WRBRW"))  # 2
     print(solution.findMinStep("G", "GGGGG"))  # 2
     print(solution.findMinStep("RBYYBBRRB", "YRBGB"))  # 3

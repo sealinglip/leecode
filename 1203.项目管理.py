@@ -40,10 +40,13 @@ LastEditTime: 2021-01-12 23:51:48
 # i != beforeItems[i][j]
 # beforeItems[i] 不含重复元素
 
+# Hard
 
 from typing import List
 # @lc code=start
 from collections import defaultdict
+
+
 class Solution:
     def sortItems(self, n: int, m: int, group: List[int], beforeItems: List[List[int]]) -> List[int]:
         fakeGrp = m
@@ -53,8 +56,8 @@ class Solution:
                 fakeGrp += 1
 
         groupItems = defaultdict(list)
-        depends = {} # 项目依赖关系
-        grpDepends = {} # 组依赖关系
+        depends = {}  # 项目依赖关系
+        grpDepends = {}  # 组依赖关系
         grpDependSet = defaultdict(set)
         for i in range(n):
             groupItems[group[i]].append(i)
@@ -63,17 +66,18 @@ class Solution:
 
             for dependency in beforeItems[i]:
                 grp = group[dependency]
-                if grp == group[i]: # 组内依赖关系
-                    depends[dependency] = depends.get(dependency, 0) + 1 # 项目依赖dependency的数量加1
+                if grp == group[i]:  # 组内依赖关系
+                    depends[dependency] = depends.get(
+                        dependency, 0) + 1  # 项目依赖dependency的数量加1
                 elif grp not in grpDependSet[group[i]]:
-                    grpDepends[grp] = grpDepends.get(grp, 0) + 1  # 组依赖dependency的数量加1
+                    grpDepends[grp] = grpDepends.get(
+                        grp, 0) + 1  # 组依赖dependency的数量加1
                     grpDependSet[group[i]].add(grp)
-                    
 
         topologicGrpSort = []
         while grpDepends:
             zeroDepends = [key for key in grpDepends if grpDepends[key] == 0]
-            if not zeroDepends: # 有环无解
+            if not zeroDepends:  # 有环无解
                 return []
             topologicGrpSort.extend(zeroDepends)
             for g in zeroDepends:
@@ -83,7 +87,7 @@ class Solution:
                 grpDepends.pop(g)
 
         topologicGrpSort.reverse()
-        
+
         res = []
         for grp in topologicGrpSort:
             items = groupItems[grp]
@@ -91,7 +95,7 @@ class Solution:
             while items:
                 zeroDepends = [
                     key for key in items if depends[key] == 0]  # 没有任何依赖的项目
-                if not zeroDepends: # 有环无解
+                if not zeroDepends:  # 有环无解
                     return []
                 topologicItemSort.extend(zeroDepends)
                 for d in zeroDepends:
@@ -104,6 +108,7 @@ class Solution:
 
         return res
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

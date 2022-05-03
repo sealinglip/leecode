@@ -38,31 +38,39 @@ LastEditTime: 2020-10-03 08:06:35
 # exention -> exection(将 'n' 替换为 'c')
 # exection -> execution(插入 'u')
 
+# 提示：
+# 0 <= word1.length, word2.length <= 500
+# word1 和 word2 由小写英文字母组成
+
+# Hard
 # @lc code=start
+
+
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         # 对于给定的两个字符串，长度记为m和n
         # d(a, b) 定义为两个字符串长度为a(0 <= a <= m)的子串和长度为b(0 <= b <= n)的子串的编辑距离
         # d(a, b) 满足下面条件
-        # d(a, b) = min(d(a-1, b-1) + (1 if word1[a-1] != word2[b-1] else 0), 
+        # d(a, b) = min(d(a-1, b-1) + (1 if word1[a-1] != word2[b-1] else 0),
         #               d(a, b-1) + 1, d(a-1, b) + 1), if a > 0 and b > 0
         #         = a + b, if a == 0 or b == 0
         m, n = len(word1), len(word2)
 
         if m == 0 or n == 0:
             return m + n
-        
-        dp = [[0] * (n + 1) for _ in range(m + 1)] # 状态矩阵
+
+        dp = [[0] * (n + 1) for _ in range(m + 1)]  # 状态矩阵
         # 初始化边界
         for i in range(m + 1):
             dp[i][0] = i
         for j in range(n + 1):
             dp[0][j] = j
-        
+
         # 计算所有dp
         for i in range(1, m + 1):
             for j in range(1, n + 1):
-                dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + (1 if word1[i - 1] != word2[j - 1] else 0))
+                dp[i][j] = min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1]
+                               [j - 1] + (1 if word1[i - 1] != word2[j - 1] else 0))
 
         # 如果需要输出具体的变化过程，如下
         # step = []
@@ -95,6 +103,7 @@ class Solution:
 
         return dp[m][n]
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

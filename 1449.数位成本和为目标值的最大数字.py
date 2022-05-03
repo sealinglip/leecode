@@ -48,6 +48,8 @@
 # 1 <= cost[i] <= 5000
 # 1 <= target <= 5000
 
+# Hard
+
 from typing import List
 # @lc code=start
 

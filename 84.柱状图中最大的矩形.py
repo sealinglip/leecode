@@ -15,20 +15,33 @@ LastEditTime: 2020-09-20 20:16:58
 # 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
 
 # 求在该柱状图中，能够勾勒出来的矩形的最大面积。
-# 以上是柱状图的示例，其中每个柱子的宽度为 1，给定的高度为[2, 1, 5, 6, 2, 3]。
-# 图中阴影部分为所能勾勒出的最大矩形面积，其面积为 10 个单位。
 
-# 示例:
-# 输入: [2, 1, 5, 6, 2, 3]
-# 输出: 10
+
+# 示例 1:
+# 输入：heights = [2, 1, 5, 6, 2, 3]
+# 输出：10
+# 解释：最大的矩形为图中红色区域，面积为 10
+
+# 示例 2：
+# 输入： heights = [2, 4]
+# 输出： 4
+
+
+# 提示：
+# 1 <= heights.length <= 10^5
+# 0 <= heights[i] <= 10^4
+
+# Hard
 
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         if not heights:
             return 0
-        
+
         largest = 0
         stack = []
         for idx, height in enumerate(heights):
@@ -51,6 +64,7 @@ class Solution:
 
         return largest
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

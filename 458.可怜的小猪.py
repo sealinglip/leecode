@@ -34,6 +34,8 @@
 # 1 <= minutesToDie <= minutesToTest <= 100
 
 # 复习
+# Hard
+
 # @lc code=start
 from math import ceil, log
 

@@ -23,16 +23,24 @@ LastEditTime: 2020-08-31 16:05:50
 # 输入: "abcd"
 # 输出: "dcbabcd"
 
+# 提示：
+# 0 <= s.length <= 5 * 10^4
+# s 仅由小写英文字母组成
+
+# Hard
+
 # @lc code=start
+
+
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
         if not s:
             return s
-        
+
         # 暴力法
         # def isPalindrome(txt: str) -> bool:
         #     return txt == txt[::-1]
-        
+
         # c0 = s[0] # 第0个字符
         # offset, s_len = -1, len(s)
         # while offset > -s_len:
@@ -40,13 +48,13 @@ class Solution:
         #         break
         #     else:
         #         offset -= 1
-        
+
         # return s[-1:offset:-1] + s
 
         # KMP法
         s_len = len(s)
-        next = [-1] * s_len # next的第i个元素代表s[:i+1]这个子串，前缀和后缀重合字符数减1
-        for i in range(1, s_len): # 从1开始
+        next = [-1] * s_len  # next的第i个元素代表s[:i+1]这个子串，前缀和后缀重合字符数减1
+        for i in range(1, s_len):  # 从1开始
             j = next[i - 1]
             while j != -1 and s[j + 1] != s[i]:
                 j = next[j]
@@ -54,7 +62,7 @@ class Solution:
                 next[i] = j + 1
 
         best = -1
-        for i in range(s_len - 1, -1, -1): # 倒着来
+        for i in range(s_len - 1, -1, -1):  # 倒着来
             while best != -1 and s[best + 1] != s[i]:
                 best = next[best]
             if s[best + 1] == s[i]:

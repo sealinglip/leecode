@@ -36,6 +36,8 @@
 # source != target
 # 题目数据保证 source 和 target 不在封锁列表内
 
+# Hard
+
 from typing import List, Tuple
 # @lc code=start
 from collections import deque

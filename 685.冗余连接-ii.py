@@ -45,25 +45,29 @@ LastEditTime: 2021-01-13 22:34:27
 # 二维数组大小的在3到1000范围内。
 # 二维数组中的每个整数在1到N之间，其中 N 是二维数组的大小。
 
+# Hard
+
 from typing import List
 # @lc code=start
 from collections import defaultdict
+
+
 class Solution:
     def findRedundantDirectedConnection(self, edges: List[List[int]]) -> List[int]:
         if not edges:
             return None
-        
+
         N = len(edges)
-        parent = dict() # 记录每个节点的父
+        parent = dict()  # 记录每个节点的父
         graph = defaultdict(list)
         duplicateEdge = None
         for edge in edges:
             graph[edge[0]].append(edge[1])
-            if edge[1] in parent: # 已经存在，问题找到，但未知要去掉哪条边
+            if edge[1] in parent:  # 已经存在，问题找到，但未知要去掉哪条边
                 duplicateEdge = edge
             else:
                 parent[edge[1]] = edge[0]
-        if duplicateEdge: # 判断与之冲突的边，是否成环，如果未成环，则返回本边；如果有环，就要破环（本边不在环内），返回冲突边
+        if duplicateEdge:  # 判断与之冲突的边，是否成环，如果未成环，则返回本边；如果有环，就要破环（本边不在环内），返回冲突边
             nodes = set()
             node = duplicateEdge[1]
             while node:
@@ -77,16 +81,16 @@ class Solution:
         # 找出成环的节点
         def isCyclic(node: int, visitFlag: List[bool], stackFlag: List[bool]) -> bool:
             visitFlag[node] = True
-            stackFlag[node] = True # 模拟节点进栈
+            stackFlag[node] = True  # 模拟节点进栈
             for child in graph[node]:
                 if not visitFlag[child]:
                     if isCyclic(child, visitFlag, stackFlag):
                         return True
                 elif stackFlag[child]:
                     return True
-            stackFlag[node] = False # 模拟节点出栈
+            stackFlag[node] = False  # 模拟节点出栈
             return False
-        
+
         visited = [False] * (N + 1)
         recStack = [False] * (N + 1)
         nodesInCircle = set()
@@ -103,8 +107,9 @@ class Solution:
                 return edge
 
         return None
-        
+
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

@@ -27,6 +27,7 @@
 # 进阶：
 # 这道题是 寻找旋转排序数组中的最小值 的延伸题目。
 # 允许重复会影响算法的时间复杂度吗？会如何影响，为什么？
+# Hard
 
 from typing import List
 # @lc code=start

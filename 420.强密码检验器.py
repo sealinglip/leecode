@@ -32,6 +32,7 @@
 # 1 <= password.length <= 50
 # password 由字母、数字、点 '.' 或者感叹号 '!'
 
+# Hard
 
 # @lc code=start
 

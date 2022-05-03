@@ -58,6 +58,8 @@
 # 0 <= yi <= n - 1
 # 所有(xi, yi) 互不相同
 
+# Hard
+
 from typing import List
 # @lc code=start
 

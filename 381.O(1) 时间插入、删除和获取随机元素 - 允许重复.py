@@ -34,9 +34,13 @@ LastEditTime: 2020-11-01 00:12:48
 # // getRandom 应有相同概率返回 1 和 2 。
 # collection.getRandom()
 
+# Hard
+
 # @lc code=start
 from collections import defaultdict
 from random import Random
+
+
 class RandomizedCollection:
 
     def __init__(self):
@@ -47,7 +51,6 @@ class RandomizedCollection:
         self.posDict = defaultdict(set)
         self.rand = Random()
 
-
     def insert(self, val: int) -> bool:
         """
         Inserts a value to the collection. Returns true if the collection did not already contain the specified element.
@@ -56,7 +59,6 @@ class RandomizedCollection:
         contain = val in self.posDict
         self.posDict[val].add(len(self.nums) - 1)
         return not contain
-
 
     def remove(self, val: int) -> bool:
         """
@@ -95,6 +97,7 @@ class RandomizedCollection:
 # param_2 = obj.remove(val)
 # param_3 = obj.getRandom()
 # @lc code=end
+
 
 if __name__ == "__main__":
     c = RandomizedCollection()

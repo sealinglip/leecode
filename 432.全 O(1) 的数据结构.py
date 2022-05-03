@@ -43,6 +43,8 @@
 # 测试用例保证：在每次调用 dec 时，数据结构中总存在 key
 # 最多调用 inc、dec、getMaxKey 和 getMinKey 方法 5 * 10^4 次
 
+# Hard
+
 # @lc code=start
 class Node:
     def __init__(self, key: str = "", count: int = 0):

@@ -21,6 +21,7 @@
 # 2 <= s.length <= 3 * 10^4
 # s 由小写英文字母组成
 
+# Hard
 
 # @lc code=start
 class suffix_array:

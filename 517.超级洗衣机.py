@@ -35,6 +35,8 @@
 # 1 <= n <= 10^4
 # 0 <= machines[i] <= 10^5
 
+# Hard
+
 from typing import List
 # @lc code=start
 

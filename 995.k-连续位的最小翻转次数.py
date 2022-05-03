@@ -28,6 +28,8 @@
 # 1 <= A.length <= 30000
 # 1 <= K <= A.length
 
+# Hard
+
 from typing import List
 import collections
 # @lc code=start

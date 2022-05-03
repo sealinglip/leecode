@@ -25,6 +25,7 @@
 # 1 <= distance.length <= 10^5
 # 1 <= distance[i] <= 10^5
 
+# Hard
 
 from typing import List
 # @lc code=start

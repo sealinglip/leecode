@@ -23,8 +23,12 @@ LastEditTime: 2020-11-07 18:05:18
 # 输出: 3
 # 解释: 3个区间分别是: [0, 0], [2, 2], [0, 2]，它们表示的和分别为: -2, -1, 2。
 
+# Hard
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
         if not nums:
@@ -41,9 +45,9 @@ class Solution:
                 return 0
             else:
                 mid = (left + right) >> 1
-                
-                n1 = countRangeSumInner(left, mid) # 左半区内部符合条件的区间数
-                n2 = countRangeSumInner(mid + 1, right) # 右半区内部符合条件的区间数
+
+                n1 = countRangeSumInner(left, mid)  # 左半区内部符合条件的区间数
+                n2 = countRangeSumInner(mid + 1, right)  # 右半区内部符合条件的区间数
                 ret = n1 + n2
 
                 # 再加上左半区的起点和右半区的终点组成的符合条件的区间数(此时左右半区各自有序)
@@ -72,7 +76,7 @@ class Solution:
                     else:
                         sorted.append(A[p2])
                         p2 += 1
-                
+
                 for i, num in enumerate(sorted):
                     A[left + i] = sorted[i]
 

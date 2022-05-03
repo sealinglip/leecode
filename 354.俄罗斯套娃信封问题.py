@@ -16,6 +16,8 @@
 # 输出: 3
 # 解释: 最多信封的个数为 3, 组合为: [2, 3] = > [5, 4] = > [6, 7]。
 
+# Hard
+
 from typing import List
 # @lc code=start
 

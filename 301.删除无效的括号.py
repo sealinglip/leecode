@@ -25,6 +25,8 @@
 # s 由小写英文字母以及括号 '(' 和 ')' 组成
 # s 中至多含 20 个括号
 
+# Hard
+
 from typing import List
 # @lc code=start
 

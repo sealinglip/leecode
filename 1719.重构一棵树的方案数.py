@@ -45,6 +45,7 @@
 # 1 <= xi < yi <= 500
 # pairs 中的元素互不相同。
 
+# Hard
 
 from typing import List
 # @lc code=start

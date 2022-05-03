@@ -27,6 +27,8 @@
 # -1000 <= matrix[i] <= 1000
 # -10 ^ 8 <= target <= 10 ^ 8
 
+# Hard
+
 from typing import List
 # @lc code=start
 from collections import Counter

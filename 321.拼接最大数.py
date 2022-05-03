@@ -34,21 +34,25 @@
 # 输出:
 # [9, 8, 9]
 
+# Hard
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def maxNumber(self, nums1: List[int], nums2: List[int], k: int) -> List[int]:
         def pickMax(nums: List[int], n: int) -> List[int]:
             if n == 0:
                 return []
             stack = []
-            drop = len(nums) - n # 需要移除的元素个数
+            drop = len(nums) - n  # 需要移除的元素个数
             for digit in nums:
                 while drop and stack and stack[-1] < digit:
                     stack.pop()
                     drop -= 1
                 stack.append(digit)
-            return stack[:n] # 截前n位
+            return stack[:n]  # 截前n位
 
         def merge(A: List[int], B: List[int]):
             res = []
@@ -60,7 +64,7 @@ class Solution:
         L1, L2 = len(nums1), len(nums2)
         return max(merge(pickMax(nums1, i), pickMax(nums2, k - i)) for i in range(k + 1) if i <= L1 and (k - i) <= L2)
 
-        
+
 # @lc code=end
 
 if __name__ == "__main__":
