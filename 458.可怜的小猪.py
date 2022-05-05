@@ -43,7 +43,10 @@ from math import ceil, log
 class Solution:
     def poorPigs(self, buckets: int, minutesToDie: int, minutesToTest: int) -> int:
         M = minutesToTest // minutesToDie  # 能进行测试的轮数
-        # 每只猪最多可以验证M次，区分M+1种情况。每只小🐷对应一位，进制为(M+1)
+        # 每只猪最多可以验证M次，区分M+1种情况。每只小🐷对应一位，进制为(M+1)，设需要n只
+        # 那么有 n = ceil(log(buckets)/log(M+1))
+        # 将桶从0开始编号，将编号转为(M+1)进制的数
+        # 对于第i位的小猪，第j轮（j <= M)它需要饮用编号的第i位值为j的所有桶
         return ceil(log(buckets)/log(M+1))
         # @lc code=end
 
