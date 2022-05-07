@@ -43,6 +43,7 @@ LastEditTime: 2020-10-03 08:06:35
 # word1 和 word2 由小写英文字母组成
 
 # Hard
+# 复习
 # @lc code=start
 
 

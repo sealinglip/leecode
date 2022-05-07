@@ -55,14 +55,28 @@ class Solution:
         #     # 再加上 r - l - 1 一直加到 1
         #     cnt += (r - l)*(r - l - 1) // 2
 
-        for r in range(n):
-            product *= nums[r]
-            while l <= r and product >= k:
+        # 以右边界为基准
+        # for r in range(n):
+        #     product *= nums[r]
+        #     while l <= r and product >= k:
+        #         product //= nums[l]
+        #         l += 1
+        #     cnt += r - l + 1  # 所有右边界是r（inclusive）且满足题目要求的子数组
+
+        # 以左边界为基准(不然以右边界为基准来的自然简洁)
+        for l in range(n):
+            while r < n and (tmp := product * nums[r]) < k:
+                product = tmp
+                r += 1
+            cnt += r - l  # 所有左边界为l（inclusive）且满足题目要求的子数组
+            if r > l:
                 product //= nums[l]
-                l += 1
-            cnt += r - l + 1  # 所有右边界是r（inclusive）且满足题目要求的子数组
+            l += 1
+            if r < l:
+                r = l
 
         return cnt
+
 
         # @lc code=end
 if __name__ == "__main__":
