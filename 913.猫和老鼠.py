@@ -42,6 +42,7 @@
 # 猫和老鼠在游戏中总是移动
 
 # Hard
+# 复习
 
 from typing import List
 # @lc code=start
