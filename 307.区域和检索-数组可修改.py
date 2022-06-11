@@ -38,7 +38,7 @@
 # 0 <= left <= right < nums.length
 # 调用 update 和 sumRange 方法次数不大于 3 * 10^4
 
-
+# 复习
 from typing import List
 # @lc code=start
 SEC_SIZE = 50  # 分区大小
