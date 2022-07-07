@@ -49,16 +49,20 @@ class MyCalendarThree:
 
     def __init__(self):
         self.tree = defaultdict(int)  # 记录区间[l, r]的最大值
-        self.lazy = defaultdict(int)  # 标记区间[l, r]进行累计的次数
+        self.lazy = defaultdict(int)  # 标记区间[l, r]作为叶子节点进行累计的次数
 
     def update(self, start: int, end: int, l: int, r: int, idx: int):
         if r < start or end < l:  # 两个区间不重叠
             return
         if start <= l and r <= end:
+            # [start, end) 完全覆盖 [l, r)
             self.tree[idx] += 1
             self.lazy[idx] += 1
         else:
+            # 区间有重叠
+            # 求[l, r)的中值
             mid = (l + r) >> 1
+            # 更新当前节点的子节点
             self.update(start, end, l, mid, idx << 1)
             self.update(start, end, mid + 1, r, 1 + (idx << 1))
             self.tree[idx] = self.lazy[idx] + \
