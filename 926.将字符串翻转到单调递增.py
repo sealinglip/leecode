@@ -34,6 +34,7 @@
 # @lc code=start
 class Solution:
     def minFlipsMonoIncr(self, s: str) -> int:
+        # 动规
         dp0 = dp1 = 0
         for c in s:
             dp0Tmp, dp1Tmp = dp0, min(dp0, dp1)

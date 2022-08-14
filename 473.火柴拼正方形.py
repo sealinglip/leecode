@@ -51,7 +51,7 @@ class Solution:
         # 否则dp(x1 | (1 << k)) = -1 表示状态x | (1 << k)不成立
         # 如果dp((1 << len(matchsticks)) - 1) = 0，表示所有火柴都放下了，且刚好，则可以拼成正方形
         # 否则不行
-        dp = [-1] * (1 << len(matchsticks))
+        dp = [-1] * (1 << len(matchsticks))  # 初始都设为-1
         dp[0] = 0
         for x in range(1, len(dp)):
             for k, v in enumerate(matchsticks):
@@ -64,7 +64,6 @@ class Solution:
                     break
 
         return dp[-1] == 0
-
 
         # @lc code=end
 if __name__ == "__main__":
