@@ -33,6 +33,9 @@ class TreeNode:
             if node:
                 stack.extend([node.left, node.right])
 
+        while valList and valList[-1] == 'N':
+            valList.pop()
+
         return ','.join(valList)
 
     def __str__(self) -> str:
