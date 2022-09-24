@@ -33,6 +33,8 @@
 # 说明:
 # 1 <= grid.length = grid[0].length <= 50
 # 0 <= grid[i][j] <= 1
+# 1 <= n <= 500
+# grid[i][j] 为 0 或 1
 
 # Hard
 
@@ -62,7 +64,7 @@ class Solution:
             '''
             给定x，y，计算x，y所在连通域的面积
             '''
-            grid[x][y] = index
+            grid[x][y] = index  # 标记已经记过的陆地
             area = 1
             for x1, y1 in getNeighbor(x, y):  # 上下左右来一遍
                 if grid[x1][y1] == 1:

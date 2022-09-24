@@ -61,7 +61,7 @@ class Solution:
         res = 1 if preDiff == 0 else 2
         for i in range(2, N):
             diff = nums[i] - nums[i - 1]
-            # 注意下面的preDiff判断条件要包含等于0的情况
+            # 注意下面的preDiff判断条件要包含等于0的情况（初始时preDiff可能为0，后面不会为0了，因为只有diff <> 0 才可能赋值给preDiff）
             if (diff > 0 and preDiff <= 0) or (diff < 0 and preDiff >= 0):
                 res += 1
                 preDiff = diff
