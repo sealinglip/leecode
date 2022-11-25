@@ -48,7 +48,7 @@ class Solution:
         cnt = Counter()
         for i in range(lowLimit, highLimit+1):
             s = str(i)
-            idx = sum(int(d) for d in s)
+            idx = sum(map(int, s))
             cnt[idx] += 1
 
         return max(cnt.values())
