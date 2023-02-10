@@ -29,9 +29,9 @@ class ListNode:
         return head.next
 
 
-def printList(node: ListNode, end='\n'):
+def printList(node: ListNode, sep=',', end='\n'):
     print('[', end='')
     while node:
-        print(node.val, end=' ')
+        print(node.val, end=(sep if node.next else ''))
         node = node.next
     print(']', end=end)

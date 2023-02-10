@@ -45,6 +45,7 @@
 # Hard
 # 复习
 
+from collections import deque
 from typing import List
 # @lc code=start
 
