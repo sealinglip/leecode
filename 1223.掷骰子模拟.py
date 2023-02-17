@@ -45,14 +45,13 @@ class Solution:
         ROLLMAX = 16  # important：这个不能是15
         dp = deque([[1] * 6])
 
-        for _ in range(n-1):
+        for i in range(1, n):
             newDp = [sum(dp[0])] * 6
             # 减掉不合规的
-            depth = len(dp)
             for j in range(6):
-                if depth == rollMax[j]:
-                    newDp[j] -= dp[rollMax[j] - 1][j]
-                elif depth > rollMax[j]:
+                if i == rollMax[j]:
+                    newDp[j] -= 1
+                elif i > rollMax[j]:
                     newDp[j] -= sum(dp[rollMax[j]]) - dp[rollMax[j]][j]
 
             dp.appendleft([d % MOD for d in newDp])
@@ -60,7 +59,6 @@ class Solution:
                 dp.pop()
 
         return sum(dp[0]) % MOD
-
 
         # @lc code=end
 if __name__ == "__main__":
