@@ -19,6 +19,8 @@
 # 1 <= grid[0].length <= 100
 # grid[i][j] 为 0 或 1
 
+# 复习
+
 from typing import List
 # @lc code=start
 
