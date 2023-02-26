@@ -33,6 +33,7 @@ class Solution:
     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
         m, n = len(dungeon), len(dungeon[0])
         dp = [inf] * (n + 1)  # 记dp[i] 为第i个房间能到终点的最小健康点数
+        # 如果dp设计为从起点到第i个房间所需的最小健康点数，不满足状态转移方程的无后效性
         dp[-2] = 1
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):
