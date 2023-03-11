@@ -44,4 +44,13 @@ class Solution:
                 dp1Tmp += 1
             dp0, dp1 = dp0Tmp, dp1Tmp
         return min(dp0, dp1)
+
         # @lc code=end
+
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.minFlipsMonoIncr("00111"))  # 0
+    print(solution.minFlipsMonoIncr("00110"))  # 1
+    print(solution.minFlipsMonoIncr("010110"))  # 2
+    print(solution.minFlipsMonoIncr("00011000"))  # 2
