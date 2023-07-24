@@ -31,69 +31,88 @@
 # 0 <= height[i] <= 10^5
 
 # Hard
+
 from typing import List
 # @lc code=start
 
 
 class Solution:
     def trap(self, height: List[int]) -> int:
-        if not height:
+        if not height or len(height) <= 2:
             return 0
-        # 遍历，总是保存到当前位置的前最高点和位置，以及累计的装水
-        # 由两侧往中间走，直到相遇，相遇之后，取边界较低的一侧，前行至较高的一侧
-        leftHighest, leftPos, rightHighest, rightPos, totalAccum, currLeftAccum, currRightAccum = \
-            height[0], 0, height[-1], len(height) - 1, 0, 0, 0
-        l, r = leftPos + 1, rightPos - 1
-        while l < r:
-            if height[l] >= leftHighest:
-                leftHighest = height[l]
-                leftPos = l
-                totalAccum += currLeftAccum
-                currLeftAccum = 0
-            else:
-                currLeftAccum += leftHighest - height[l]
-            l += 1
-            if height[r] >= rightHighest:
-                rightHighest = height[r]
-                rightPos = r
-                totalAccum += currRightAccum
-                currRightAccum = 0
-            else:
-                currRightAccum += rightHighest - height[r]
-            r -= 1
 
-        if l == r and height[l] >= leftHighest and height[l] >= rightHighest:  # 相遇到一个更高点（比两侧都高）
-            totalAccum += currLeftAccum + currRightAccum
-        elif leftHighest > rightHighest:  # 右边继续往左边推
-            while r > leftPos:
-                if height[r] >= rightHighest:
-                    rightHighest = height[r]
-                    rightPos = r
-                    totalAccum += currRightAccum
-                    currRightAccum = 0
-                else:
-                    currRightAccum += rightHighest - height[r]
-                r -= 1
-            totalAccum += currRightAccum
-        else:  # 左边往右边推
-            while l < rightPos:
-                if height[l] >= leftHighest:
-                    leftHighest = height[l]
-                    leftPos = l
-                    totalAccum += currLeftAccum
-                    currLeftAccum = 0
-                else:
-                    currLeftAccum += leftHighest - height[l]
-                l += 1
-            totalAccum += currLeftAccum
+        res = 0
+        # 单调栈
+        stack = []
+        for i, h in enumerate(height):
+            while stack and height[stack[-1]] <= h:
+                h1 = height[stack.pop()]
+                if not stack:
+                    break
+                res += (min(h, height[stack[-1]]) - h1) * (i - stack[-1] - 1)
+            stack.append(i)
 
-        return totalAccum
+        return res
+
+        # # 遍历，总是保存到当前位置的前最高点和位置，以及累计的装水
+        # # 由两侧往中间走，直到相遇，相遇之后，取边界较低的一侧，前行至较高的一侧
+        # leftHighest, leftPos, rightHighest, rightPos, totalAccum, currLeftAccum, currRightAccum = \
+        #     height[0], 0, height[-1], len(height) - 1, 0, 0, 0
+        # l, r = leftPos + 1, rightPos - 1
+        # while l < r:
+        #     if height[l] >= leftHighest:
+        #         leftHighest = height[l]
+        #         leftPos = l
+        #         totalAccum += currLeftAccum
+        #         currLeftAccum = 0
+        #     else:
+        #         currLeftAccum += leftHighest - height[l]
+        #     l += 1
+        #     if height[r] >= rightHighest:
+        #         rightHighest = height[r]
+        #         rightPos = r
+        #         totalAccum += currRightAccum
+        #         currRightAccum = 0
+        #     else:
+        #         currRightAccum += rightHighest - height[r]
+        #     r -= 1
+
+        # if l == r and height[l] >= leftHighest and height[l] >= rightHighest:  # 相遇到一个更高点（比两侧都高）
+        #     totalAccum += currLeftAccum + currRightAccum
+        # elif leftHighest > rightHighest:  # 右边继续往左边推
+        #     while r > leftPos:
+        #         if height[r] >= rightHighest:
+        #             rightHighest = height[r]
+        #             rightPos = r
+        #             totalAccum += currRightAccum
+        #             currRightAccum = 0
+        #         else:
+        #             currRightAccum += rightHighest - height[r]
+        #         r -= 1
+        #     totalAccum += currRightAccum
+        # else:  # 左边往右边推
+        #     while l < rightPos:
+        #         if height[l] >= leftHighest:
+        #             leftHighest = height[l]
+        #             leftPos = l
+        #             totalAccum += currLeftAccum
+        #             currLeftAccum = 0
+        #         else:
+        #             currLeftAccum += leftHighest - height[l]
+        #         l += 1
+        #     totalAccum += currLeftAccum
+
+        # return totalAccum
 
 # @lc code=end
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.trap([0]))
-    print(solution.trap([8, 0, 8, 1, 0, 9, 6, 0, 7, 2, 5]))
-    print(solution.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+    print(solution.trap([6, 4, 2, 0, 3, 2, 0, 3, 1, 4, 5, 3, 2, 7, 5, 3, 0, 1, 2, 1, 3, 4, 6, 8, 1, 3]
+                        ))  # 83
+    print(solution.trap([4, 2, 0, 3, 2, 5]))  # 9
+    print(solution.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))  # 6
+    print(solution.trap([0]))  # 0
+    print(solution.trap([8, 0, 8, 1, 0, 9, 6, 0, 7, 2, 5]))  # 34
+    print(solution.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))  # 6
