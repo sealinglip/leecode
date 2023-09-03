@@ -25,16 +25,39 @@ LastEditTime: 2020-11-04 08:12:49
 # 输出：[[1, 2], [3, 10], [12, 16]]
 # 解释：这是因为新的区间[4, 8] 与[3, 5], [6, 7], [8, 10] 重叠。
 
+# 示例 3：
+# 输入：intervals = [], newInterval = [5, 7]
+# 输出：[[5, 7]]
+
+# 示例 4：
+# 输入：intervals = [[1, 5]], newInterval = [2, 3]
+# 输出：[[1, 5]]
+
+# 示例 5：
+# 输入：intervals = [[1, 5]], newInterval = [2, 7]
+# 输出：[[1, 7]]
+
+
+# 提示：
+# 0 <= intervals.length <= 10^4
+# intervals[i].length == 2
+# 0 <= intervals[i][0] <= intervals[i][1] <= 10^5
+# intervals 根据 intervals[i][0] 按 升序 排列
+# newInterval.length == 2
+# 0 <= newInterval[0] <= newInterval[1] <= 10^5
+
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         if not intervals:
             return [newInterval]
-        
+
         idx, curLb, curUb = 0, float('-inf'), float('-inf')
         nLb, nUb = newInterval
-        state = 0 # 新区间上下界都未完成合并
+        state = 0  # 新区间上下界都未完成合并
         while idx < len(intervals) and state < 2:
             # 先定位到要插入的位置
             nextLb, nextUb = intervals[idx]
@@ -48,20 +71,21 @@ class Solution:
                     continue
             elif nLb >= curLb and nLb < nextLb:
                 if nLb <= curUb:
-                    if nUb <= curUb: # 完全被包含了
+                    if nUb <= curUb:  # 完全被包含了
                         state = 2
                         break  # 直接搞定了
                     else:
-                        intervals[idx - 1][1] = nUb if (nUb < nextLb or nUb >= nextUb) else nextUb
+                        intervals[idx - 1][1] = nUb if (nUb <
+                                                        nextLb or nUb >= nextUb) else nextUb
                         if nUb >= nextLb:
                             del intervals[idx]
-                            state = 1 # 下界完成了合并
+                            state = 1  # 下界完成了合并
                             continue
                         else:
                             state = 2
-                            break # 直接搞定了
+                            break  # 直接搞定了
                 elif nUb >= nextLb:
-                    intervals[idx][0] = nLb 
+                    intervals[idx][0] = nLb
                     state = 1  # 完成下界合并
                     if nUb <= nextUb:
                         state = 2
@@ -71,19 +95,20 @@ class Solution:
                 else:
                     intervals.insert(idx, newInterval)
                     state = 2
-                    break # 直接搞定了
-                
+                    break  # 直接搞定了
+
             curLb, curUb = intervals[idx]
             idx += 1
 
         if state == 0:
-            if curUb < nLb: # 不搭
+            if curUb < nLb:  # 不搭
                 intervals.append(newInterval)
             elif curUb < nUb:
                 intervals[-1][1] = nUb
-        
+
         return intervals
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()

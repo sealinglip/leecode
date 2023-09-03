@@ -43,11 +43,12 @@ from listnode import ListNode, printList
 #         self.val = x
 #         self.next = None
 
+
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
         if not head:
             return None
-        
+
         slow, fast = head, head
         while fast:
             slow = slow.next
@@ -55,13 +56,23 @@ class Solution:
             if not fast:
                 return None
             fast = fast.next
-            if slow == fast: # 快指针追上了慢指针
+            if slow == fast:  # 快指针追上了慢指针
                 ptr = head
                 while slow != ptr:
                     slow = slow.next
                     ptr = ptr.next
                 return ptr
         return None
-        
+
 # @lc code=end
 
+
+if __name__ == "__main__":
+    solution = Solution()
+    head = ListNode.convert_list([3, 2, 0, -4])
+    head.next.next.next.next = head.next
+    printList(solution.detectCycle(head))
+
+    head = ListNode.convert_list([1, 2])
+    head.next.next = head
+    printList(solution.detectCycle(head))

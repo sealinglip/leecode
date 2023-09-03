@@ -31,7 +31,11 @@ class ListNode:
 
 def printList(node: ListNode, sep=',', end='\n'):
     print('[', end='')
+    visited = set()
     while node:
+        if node in visited:
+            break
         print(node.val, end=(sep if node.next else ''))
+        visited.add(node)
         node = node.next
     print(']', end=end)

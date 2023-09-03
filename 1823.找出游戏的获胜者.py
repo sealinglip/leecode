@@ -55,6 +55,7 @@ class Solution:
         # 当只剩一个人时，他必然活下来，
         # 即f(1, k) = 0，
         # 我们从f(1, k)推出f(2, k)一直到f(n, k)即可
+
         ans = 0  # f(1, k)
         for i in range(2, n+1):
             ans = (ans + k) % i
@@ -65,3 +66,6 @@ if __name__ == "__main__":
     solution = Solution()
     print(solution.findTheWinner(5, 2))  # 3
     print(solution.findTheWinner(6, 5))  # 1
+    print(solution.findTheWinner(10, 5))  # 3
+    print(solution.findTheWinner(100, 5))  # 47
+    print(solution.findTheWinner(100, 6))  # 68

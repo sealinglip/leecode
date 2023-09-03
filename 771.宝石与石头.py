@@ -30,20 +30,19 @@ LastEditTime: 2020-10-02 08:29:03
 # J 中的字符不重复。
 
 # @lc code=start
+
+
 class Solution:
     def numJewelsInStones(self, J: str, S: str) -> int:
         if not J or not S:
             return 0
 
         js = set(J)
-        count = 0
-        for s in S:
-            if s in js:
-                count += 1
-        return count
+        return sum(s in js for s in S)
 # @lc code=end
+
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.numJewelsInStones("aA", "aAAbbbb"))
-    print(solution.numJewelsInStones("z", "ZZ"))
+    print(solution.numJewelsInStones("aA", "aAAbbbb"))  # 3
+    print(solution.numJewelsInStones("z", "ZZ"))  # 0
