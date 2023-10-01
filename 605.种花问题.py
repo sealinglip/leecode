@@ -16,10 +16,11 @@
 # 输入: flowerbed = [1, 0, 0, 0, 1], n = 2
 # 输出: False
 
-# 注意:
-# 数组内已种好的花不会违反种植规则。
-# 输入的数组长度范围为[1, 20000]。
-# n 是非负整数，且不会超过输入数组的大小。
+# 提示：
+# 1 <= flowerbed.length <= 2 * 10^4
+# flowerbed[i] 为 0 或 1
+# flowerbed 中不存在相邻的两朵花
+# 0 <= n <= flowerbed.length
 
 
 from typing import List
@@ -31,37 +32,33 @@ class Solution:
         if not flowerbed:
             return n == 0
 
-        cap = 0
         N = len(flowerbed)
-        i = 0
-        while i < N:
-            if flowerbed[i]:
-                i += 2
-                continue
-            if i == 0:
-                if (N == 1 or flowerbed[1] == 0):
-                    i += 1
-                    cap += 1
-            elif i == N - 1:
-                if flowerbed[i - 1] == 0:
-                    i += 1
-                    cap += 1
+        zeros = 0
+        res = 0
+        for i, f in enumerate(flowerbed):
+            if f:
+                res += (zeros >> 1) if zeros == i else ((zeros-1) >> 1)
+                zeros = 0
             else:
-                if flowerbed[i - 1] == 0 and flowerbed[i + 1] == 0:
-                    i += 1
-                    cap += 1
-            i += 1
-            if cap >= n:
-                break
+                zeros += 1
 
-        return cap >= n
+        if zeros == N:
+            res += (zeros+1) >> 1
+        elif zeros > 1:
+            res += zeros >> 1
+
+        return res >= n
 
         # @lc code=end
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.canPlaceFlowers([1, 0, 0, 0, 1], 1))
-    print(solution.canPlaceFlowers([1, 0, 0, 0, 1], 2))
-    print(solution.canPlaceFlowers([1, 0, 0, 0, 0, 1], 2))
-    print(solution.canPlaceFlowers([1, 0, 0, 0, 0, 0, 1], 2))
+    print(solution.canPlaceFlowers([0], 1))  # True
+    print(solution.canPlaceFlowers([0, 0, 0], 2))  # True
+    print(solution.canPlaceFlowers([1, 0, 0, 0, 1], 1))  # True
+    print(solution.canPlaceFlowers([1, 0, 0, 0, 1], 2))  # False
+    print(solution.canPlaceFlowers([0, 0, 1, 0, 0], 2))  # True
+    print(solution.canPlaceFlowers([1, 0, 0, 0, 0, 1], 2))  # False
+    print(solution.canPlaceFlowers([1, 0, 0, 0, 0, 0, 1], 2))  # True
+    print(solution.canPlaceFlowers([0, 0, 1, 0, 0, 0, 1], 2))  # True
