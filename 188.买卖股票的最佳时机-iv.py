@@ -19,7 +19,7 @@
 #      随后，在第 5 天 (股票价格 = 0) 的时候买入，在第 6 天 (股票价格 = 3) 的时候卖出, 这笔交易所能获得利润 = 3-0 = 3 。
 
 # 提示：
-# 0 <= k <= 10^9
+# 0 <= k <= 100
 # 0 <= prices.length <= 1000
 # 0 <= prices[i] <= 1000
 
@@ -67,5 +67,5 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.maxProfit(2, [2, 4, 1]))
-    print(solution.maxProfit(2, [3, 2, 6, 5, 0, 3]))
+    print(solution.maxProfit(2, [2, 4, 1]))  # 2
+    print(solution.maxProfit(2, [3, 2, 6, 5, 0, 3]))  # 7

@@ -38,7 +38,6 @@ LastEditTime: 2020-10-18 09:20:43
 # 输入：prices = [1]
 # 输出：0
 
-
 # 提示：
 # 1 <= prices.length <= 10^5
 # 0 <= prices[i] <= 10^5
@@ -55,7 +54,7 @@ class Solution:
 
         # 每天的操作之后的状态只有五种情况：0 没有交易，持有股票，1 已经发生一次交易，不持有股票，
         # 2 已经发生一次交易，持有股票，3 已经发生两次交易，4 没有交易，不持有股票（这种情况其实不需要考虑）
-        # 设dp(i)[j]为第i天第j种情况下的最大交易
+        # 设dp(i)[j]为第i天第j种情况下的最大利润
         #
         # dp(i)[0] = max(dp(i-1)[0], -prices[i])  0 < i < len(prices)
         # dp(i)[1] = max(dp(i-1)[1], dp(i)[0] + prices[i])  0 < i < len(prices)
@@ -75,6 +74,7 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.maxProfit([7, 6, 4, 3, 1]))
-    print(solution.maxProfit([1, 2, 3, 4, 5]))
-    print(solution.maxProfit([3, 3, 5, 0, 0, 3, 1, 4]))
+    print(solution.maxProfit([1]))  # 0
+    print(solution.maxProfit([7, 6, 4, 3, 1]))  # 0
+    print(solution.maxProfit([1, 2, 3, 4, 5]))  # 4
+    print(solution.maxProfit([3, 3, 5, 0, 0, 3, 1, 4]))  # 6
