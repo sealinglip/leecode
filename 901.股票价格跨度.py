@@ -38,8 +38,8 @@
 class StockSpanner:
 
     def __init__(self):
-        self.stack = []
-        self.idx = 0
+        self.stack = []  # 单调栈
+        self.idx = 0  # 记录当前是第几天
 
     def next(self, price: int) -> int:
         while self.stack and self.stack[-1][0] <= price:

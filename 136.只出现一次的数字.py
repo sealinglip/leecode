@@ -17,17 +17,19 @@
 # 输入: [4,1,2,1,2]
 # 输出: 4
 
+from functools import reduce
 from typing import List
 # @lc code=start
+
+
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        if not nums:
-            return None
-        
-        res = nums[0]
-        for i in range(1, len(nums)):
-            num = nums[i]
-            res ^= num
-        return res
+        return reduce(lambda x, y: x ^ y, nums, 0)
+
 # @lc code=end
 
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.singleNumber([2, 2, 1]))  # 1
+    print(solution.singleNumber([4, 1, 2, 1, 2]))  # 4
