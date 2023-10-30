@@ -33,8 +33,10 @@ class Solution:
 
         # 要实现对数时间复杂度，不能顺序查找，采用二分查找可得解
 
+
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.hIndex([0, 1, 3, 5, 6]))
-    print(solution.hIndex([0]))
+    print(solution.hIndex([0, 1, 3, 5, 6]))  # 3
+    print(solution.hIndex([1, 2, 100]))  # 2
+    print(solution.hIndex([0]))  # 0

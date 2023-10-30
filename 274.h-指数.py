@@ -31,5 +31,6 @@ class Solution:
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.hIndex([3, 0, 6, 1, 5]))
-    print(solution.hIndex([0]))
+    print(solution.hIndex([3, 0, 6, 1, 5]))  # 3
+    print(solution.hIndex([1, 3, 1]))  # 1
+    print(solution.hIndex([0]))  # 0
