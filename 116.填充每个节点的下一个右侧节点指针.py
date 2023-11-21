@@ -53,22 +53,41 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
-        if root:
-            lvl = [root]
-            while lvl:
-                newLvl = []
-                prev = None
-                for node in lvl:
-                    if prev:
-                        prev.next = node
-                    prev = node
-                    if node.left:
-                        newLvl.append(node.left)
-                    if node.right:
-                        newLvl.append(node.right)
-                prev.next = None
-                lvl = newLvl
+        # if root:
+        #     lvl = [root]
+        #     while lvl:
+        #         newLvl = []
+        #         prev = None
+        #         for node in lvl:
+        #             if prev:
+        #                 prev.next = node
+        #             prev = node
+        #             if node.left:
+        #                 newLvl.append(node.left)
+        #             if node.right:
+        #                 newLvl.append(node.right)
+        #         prev.next = None
+        #         lvl = newLvl
                 
+        # return root
+        start = root
+        while start:
+            last = None
+            nextStart = start.left
+            node = start
+            while node:
+                if node.left:
+                    if last:
+                        last.next = node.left            
+                    last = node.left
+                if node.right:
+                    if last:
+                        last.next = node.right
+                    last = node.right
+                    
+                node = node.next
+            start = nextStart
+
         return root
 # @lc code=end
 

@@ -50,3 +50,5 @@ if __name__ == "__main__":
     solution = Solution()
     print(solution.findRepeatedDnaSequences(
         "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"))  # ["AAAAACCCCC", "CCCCCAAAAA"]
+    print(solution.findRepeatedDnaSequences(
+        "AAAAAAAAAAAAA"))  # ["AAAAAAAAAA"]

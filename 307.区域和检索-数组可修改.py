@@ -72,3 +72,8 @@ class NumArray:
         # obj.update(index,val)
         # param_2 = obj.sumRange(left,right)
         # @lc code=end
+if __name__ == "__main__":
+    numArray = NumArray([1, 3, 5])
+    print(numArray.sumRange(0, 2)) # 9
+    numArray.update(1, 2)
+    print(numArray.sumRange(0, 2)) # 8

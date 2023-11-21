@@ -28,8 +28,10 @@
 # 输出：127
 
 # 提示：
-# 1 <= nums.length <= 2 * 10^4
+# 1 <= nums.length <= 2 * 10^5
 # 0 <= nums[i] <= 2^31 - 1
+
+# 复习
 
 from typing import List
 # @lc code=start
@@ -65,9 +67,10 @@ class Solution:
         # 初始化搜索树
         for n in nums:
             node = root
+            # 从高位到低位构建搜索树
             f = FLAG
             while f:
-                b = f & n  # 判断该位是否为0
+                b = f & n  # 判断该位是否为1
                 if b:
                     node = node.getOrCreateRight()
                 else:
@@ -81,7 +84,7 @@ class Solution:
             xor = 0
             f = FLAG
             while f:
-                b = f & n  # 判断该位是否为0
+                b = f & n  # 判断该位是否为1
                 if b:
                     next = node.left
                 else:
@@ -101,10 +104,10 @@ class Solution:
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.findMaximumXOR([3, 10, 5, 25, 2, 8]))
-    print(solution.findMaximumXOR([0]))
-    print(solution.findMaximumXOR([1]))
-    print(solution.findMaximumXOR([2, 4]))
-    print(solution.findMaximumXOR([8, 10, 2]))
+    print(solution.findMaximumXOR([3, 10, 5, 25, 2, 8])) # 28
+    print(solution.findMaximumXOR([0])) # 0
+    print(solution.findMaximumXOR([1])) # 0
+    print(solution.findMaximumXOR([2, 4])) # 6
+    print(solution.findMaximumXOR([8, 10, 2])) # 10
     print(solution.findMaximumXOR(
-        [14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70]))
+        [14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70])) # 127

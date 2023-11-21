@@ -36,11 +36,11 @@
 
 
 # 提示：
-
-# 1 <= left < right <= 109
+# 1 <= left < right <= 10^9
 # 在单个测试用例中，对 addRange 、  queryRange 和 removeRange 的调用总数不超过 10^4 次
 
 # Hard
+
 # @lc code=start
 from sortedcontainers import SortedDict
 

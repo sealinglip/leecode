@@ -27,6 +27,8 @@
 # 1 <= words[i].length <= 1000
 # words[i] 仅包含小写字母
 
+# 复习
+
 from typing import List
 # @lc code=start
 from collections import defaultdict
