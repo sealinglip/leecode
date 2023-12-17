@@ -40,7 +40,7 @@ class Solution:
         dp = [cost[0], cost[1]]
         N = len(cost)
         if N < 3:
-            return dp[N - 1]
+            return min(dp)
         else:
             for i in range(2, N):
                 tmp = min(dp[0], dp[1]) + cost[i]
@@ -51,5 +51,6 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.minCostClimbingStairs([10, 15, 20]))
-    print(solution.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]))
+    print(solution.minCostClimbingStairs([1,100])) # 1
+    print(solution.minCostClimbingStairs([10, 15, 20])) # 15
+    print(solution.minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1])) # 6
