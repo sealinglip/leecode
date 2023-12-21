@@ -32,40 +32,55 @@ from typing import List
 
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        N = len(nums)
-        if N == 1 or nums[0] > nums[1]:
-            return 0
-        elif nums[-1] > nums[-2]:
-            return N - 1
+        # 下面的解法嫌繁琐，直接二分查找即可
+        # N = len(nums)
+        # if N == 1 or nums[0] > nums[1]:
+        #     return 0
+        # elif nums[-1] > nums[-2]:
+        #     return N - 1
 
-        def findPeak(l: int, r: int) -> int:
-            '''
-            查找区间[l, r]之间的峰值
-            '''
-            if l + 2 == r:
-                if nums[l] < nums[l + 1] and nums[r] < nums[l + 1]:
-                    return l + 1
-                else:
-                    return None
-            if l + 3 == r:
-                if nums[l] < nums[l + 1] and nums[l + 2] < nums[l + 1]:
-                    return l + 1
-                elif nums[r] < nums[l + 2] and nums[l + 2] > nums[l + 1]:
-                    return l + 2
-                else:
-                    return None
-            else:
-                m = (l + r) >> 1
-                if nums[m] > nums[m - 1] and nums[m] > nums[m + 1]:
+        # def findPeak(l: int, r: int) -> int:
+        #     '''
+        #     查找区间[l, r]之间的峰值
+        #     '''
+        #     if l + 2 == r:
+        #         if nums[l] < nums[l + 1] and nums[r] < nums[l + 1]:
+        #             return l + 1
+        #         else:
+        #             return None
+        #     if l + 3 == r:
+        #         if nums[l] < nums[l + 1] and nums[l + 2] < nums[l + 1]:
+        #             return l + 1
+        #         elif nums[r] < nums[l + 2] and nums[l + 2] > nums[l + 1]:
+        #             return l + 2
+        #         else:
+        #             return None
+        #     else:
+        #         m = (l + r) >> 1
+        #         if nums[m] > nums[m - 1] and nums[m] > nums[m + 1]:
+        #             return m
+        #         else:
+        #             res = findPeak(l, m)
+        #             if res is not None:
+        #                 return res
+        #             else:
+        #                 return findPeak(m, r)
+
+        # return findPeak(0, N - 1)
+        
+        # 二分
+        n = len(nums)
+        l, r = 0, n-1
+        while l < r:
+            m = (l+r) >> 1
+            if nums[m] > nums[m+1]:
+                if m == 0 or nums[m] > nums[m-1]:
                     return m
                 else:
-                    res = findPeak(l, m)
-                    if res is not None:
-                        return res
-                    else:
-                        return findPeak(m, r)
-
-        return findPeak(0, N - 1)
+                    r = m - 1
+            else:
+                l = m + 1
+        return l
 
         # @lc code=end
 if __name__ == "__main__":
