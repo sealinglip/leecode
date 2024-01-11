@@ -44,3 +44,9 @@ class Solution:
 
         return week[(days + 3) % 7]
 # @lc code=end
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.dayOfTheWeek(31, 8, 2019)) # "Saturday"
+    print(solution.dayOfTheWeek(18, 7, 1999)) # "Sunday"
+    print(solution.dayOfTheWeek(15, 8, 1993)) # "Sunday"
