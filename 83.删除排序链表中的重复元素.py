@@ -51,8 +51,8 @@ if __name__ == "__main__":
     solution = Solution()
     node = ListNode.convert_list([1, 1, 2])
     solution.deleteDuplicates(node)
-    printList(node)
+    printList(node) # [1,2]
     node = ListNode.convert_list([1, 1, 2, 3, 3])
     solution.deleteDuplicates(node)
-    printList(node)
+    printList(node) # [1,2,3]
     
