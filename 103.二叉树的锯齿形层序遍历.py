@@ -14,7 +14,7 @@ LastEditTime: 2020-10-18 08:08:31
 #
 # 给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
 
-# 例如：
+# 示例 1：
 # 给定二叉树[3, 9, 20, null, null, 15, 7],
 #     3
 #    / \
@@ -27,6 +27,19 @@ LastEditTime: 2020-10-18 08:08:31
 #   [20,9],
 #   [15,7]
 # ]
+
+# 示例 2：
+# 输入：root = [1]
+# 输出：[[1]]
+
+# 示例 3：
+# 输入：root = []
+# 输出：[]
+ 
+
+# 提示：
+# 树中节点数目在范围 [0, 2000] 内
+# -100 <= Node.val <= 100
 
 from treenode import TreeNode
 from typing import List
@@ -72,4 +85,6 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.zigzagLevelOrder(TreeNode.createBFSTree([3, 9, 20, None, None, 15, 7])))
+    print(solution.zigzagLevelOrder(TreeNode.createBFSTree([3, 9, 20, None, None, 15, 7]))) # [[3],[20,9],[15,7]]
+    print(solution.zigzagLevelOrder(TreeNode.createBFSTree([1]))) # [[1]]
+    print(solution.zigzagLevelOrder(TreeNode.createBFSTree([]))) # []

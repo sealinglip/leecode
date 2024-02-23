@@ -51,20 +51,38 @@ class Solution:
         # postOrder(root, res)
         
         # 方法2：迭代
-        stack = [root]
-        while stack:
-            node = stack.pop()
-            res.append(node.val)
-            if node.left:
-                stack.append(node.left)
-            if node.right:
-                stack.append(node.right)
+        # stack = [root]
+        # while stack:
+        #     node = stack.pop()
+        #     res.append(node.val)
+        #     if node.left:
+        #         stack.append(node.left)
+        #     if node.right:
+        #         stack.append(node.right)
         
-        res.reverse() #这个很重要，翻转后返回
+        # res.reverse() #这个很重要，翻转后返回
+
+        # 方法3：迭代（不翻转）
+        stack = []
+        prev = None
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if root.right is None or prev == root.right:
+                res.append(root.val)
+                prev = root
+                root = None
+            else:
+                stack.append(root)
+                root = root.right
+
         return res
 
 # @lc code=end
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.postorderTraversal(TreeNode.createBFSTree([1, None, 2, 3])))
+    print(solution.postorderTraversal(TreeNode.createBFSTree([1, None, 2, 3]))) # [3, 2, 1]
+    print(solution.postorderTraversal(TreeNode.createBFSTree([1, None, 2, 3, 4]))) # [3, 4, 2, 1]

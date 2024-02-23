@@ -28,7 +28,7 @@ class Solution:
         x = y = -1  # 记录要交换的位置，-1代表没啥可交换的
         maxIdx = n - 1  # 记录最大位的位置
 
-        for i in range(n-1, -1, -1):
+        for i in range(n-2, -1, -1):
             if s[i] > s[maxIdx]:
                 maxIdx = i
             elif s[i] < s[maxIdx]:

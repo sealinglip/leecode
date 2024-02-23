@@ -26,6 +26,7 @@ LastEditTime: 2020-10-27 08:22:14
 # 输出: [1, 2, 3]
 # 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
 
+from typing import List
 from treenode import TreeNode
 # @lc code=start
 # Definition for a binary tree node.

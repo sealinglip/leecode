@@ -35,7 +35,7 @@
 # @lc code=start
 class Solution:
     def canWinNim(self, n: int) -> bool:
-        return (n & 3) != 0
+        return (n & 3) != 0 # 判断能否被4整除
 
         # @lc code=end
 if __name__ == "__main__":
