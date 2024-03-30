@@ -44,31 +44,38 @@ class MyQueue:
         """
         Initialize your data structure here.
         """
-        self.queue = []
+        self.inStack = []
+        self.outStack = []
 
     def push(self, x: int) -> None:
         """
         Push element x to the back of queue.
         """
-        self.queue.append(x)
+        self.inStack.append(x)
 
     def pop(self) -> int:
         """
         Removes the element from in front of queue and returns that element.
         """
-        return self.queue.pop(0)
+        if not self.outStack and self.inStack:
+            while self.inStack:
+                self.outStack.append(self.inStack.pop())
+        return self.outStack.pop()
 
     def peek(self) -> int:
         """
         Get the front element.
         """
-        return self.queue[0]
+        if not self.outStack and self.inStack:
+            while self.inStack:
+                self.outStack.append(self.inStack.pop())
+        return self.outStack[-1]
 
     def empty(self) -> bool:
         """
         Returns whether the queue is empty.
         """
-        return len(self.queue) == 0
+        return len(self.inStack) + len(self.outStack) == 0
 
 
 # Your MyQueue object will be instantiated and called as such:
@@ -79,8 +86,11 @@ class MyQueue:
 # param_4 = obj.empty()
 # @lc code=end
 if __name__ == "__main__":
-    obj = MyQueue()
-    obj.push("123")
-    param_2 = obj.pop()
-    param_3 = obj.peek()
-    param_4 = obj.empty()
+    myQueue = MyQueue()
+    myQueue.push(1)
+    myQueue.push(2)
+    print(myQueue.peek()) # 1
+    print(myQueue.pop()) # 1
+    print(myQueue.empty()) # False
+    print(myQueue.pop()) # 2
+    print(myQueue.empty()) # True

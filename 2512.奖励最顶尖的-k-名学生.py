@@ -36,7 +36,7 @@
 # report[i] 只包含小写英文字母和空格 ' ' 。
 # report[i] 中连续单词之间有单个空格隔开。
 # 1 <= report[i].length <= 100
-# 1 <= student_id[i] <= 109
+# 1 <= student_id[i] <= 10^9
 # student_id[i] 的值 互不相同 。
 # 1 <= k <= n
 

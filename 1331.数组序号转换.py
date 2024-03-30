@@ -29,7 +29,7 @@
 
 # 提示：
 # 0 <= arr.length <= 10^5
-# -109 <= arr[i] <= 10^9
+# -10^9 <= arr[i] <= 10^9
 
 from typing import List
 # @lc code=start
