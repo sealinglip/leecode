@@ -40,10 +40,10 @@ from typing import List
 # @lc code=start
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        # 方法1：动态规划
-        # dp = {i: [] for i in range(target+1)} # dp[i] 代表数字i可以被分解为candidates的解集
+        # 方法1：动规（没有剪枝）
+        dp = {i: [] for i in range(target+1)} # dp[i] 代表数字i可以被分解为candidates的解集
 
-        # # 这里一定要将candidates降序排列
+        # # 这里一定要将candidates降序排列，下面判断到j == i，直接赋值，如果candidates由小到大遍历，会把dp[j]中原来的值冲掉
         # for i in sorted(candidates, reverse=True):
         #     for j in range(i, target+1):
         #         if j == i:
@@ -51,31 +51,39 @@ class Solution:
         #         else:
         #             dp[j].extend([x+[i] for x in dp[j-i]])
         # return dp[target]
+        
+        # 如果不对candidates排序，那么dp[0]需要添加一个空列表作为边界条件
+        # dp[0].append([])
+        # for i in candidates:
+        #     for j in range(i, target+1):
+        #         dp[j].extend([x+[i] for x in dp[j-i]])
+        # return dp[target]
+
 
         # 方法2：回溯+剪枝
         candidates.sort(reverse=True) # 从大到小排
         res = []
         pathes = []
         
-        def findPath(nc: List[int], t: int):
+        def findPath(t: int):
             if t == 0:
                 res.append(pathes[:]) # make a copy
                 return
             limit = min(t, pathes[-1]) if pathes else t # 先选大数再选小数
-            for num in nc:
+            for num in candidates:
                 if num > limit:
                     continue
                 pathes.append(num)
-                findPath(nc, t - num)
+                findPath(t - num)
                 pathes.pop()
 
-        findPath(candidates, target)
+        findPath(target)
         return res
 
 
-    
 # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.combinationSum([2, 3, 6, 7], 7))
-    print(solution.combinationSum([2, 3, 5], 8))
+    print(solution.combinationSum([2, 3, 6, 7], 7)) # [[2, 2, 3], [7]]
+    print(solution.combinationSum([7, 3, 2, 6], 7)) # [[7], [3, 2, 2]]
+    print(solution.combinationSum([2, 3, 5], 8)) # [[2, 2, 2, 2], [2, 3, 3], [3, 5]]

@@ -95,3 +95,14 @@ class MyHashSet:
 # obj.remove(key)
 # param_3 = obj.contains(key)
 # @lc code=end
+
+if __name__ == "__main__":
+    myHashSet = MyHashSet()
+    myHashSet.add(1)
+    myHashSet.add(2)
+    print(myHashSet.contains(1)) # True
+    print(myHashSet.contains(3)) # False
+    myHashSet.add(2)
+    print(myHashSet.contains(2)) # True
+    myHashSet.remove(2)
+    print(myHashSet.contains(2)) # False

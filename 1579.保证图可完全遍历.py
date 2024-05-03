@@ -45,6 +45,7 @@ LastEditTime: 2021-01-27 23:21:37
 # 所有元组(typei, ui, vi) 互不相同
 
 # Hard
+# 复习
 
 from typing import List
 # @lc code=start
@@ -76,7 +77,7 @@ class UnionFind:
         return True
 
     def isConnected(self, x: int, y: int) -> bool:
-        x, y = self.findset(x), self.findset(y)
+        x, y = self.find(x), self.find(y)
         return x == y
 
 class Solution:

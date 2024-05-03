@@ -41,28 +41,25 @@ LastEditTime: 2021-04-24 21:16:37
 
 # 进阶：如果给定的数组中含有负数会发生什么？问题会产生何种变化？如果允许负数出现，需要向题目中添加哪些限制条件？
 
+from functools import cache
 from typing import List
 # @lc code=start
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
-        cache = {}
-        def combinationSum4Inner(nums: List[int], t: int) -> int:
-            if t in cache:
-                return cache[t]
-
+        @cache
+        def combinationSum4Inner(t: int) -> int:
             sum = 0
             for n in nums:
                 if n < t:
-                    sum += combinationSum4Inner(nums, t - n)
+                    sum += combinationSum4Inner(t - n)
                 elif n == t:
                     sum += 1
-            cache[t] = sum
             return sum
-        return combinationSum4Inner(nums, target)
+        return combinationSum4Inner(target)
 # @lc code=end
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.combinationSum4([4, 2, 1], 32))
-    print(solution.combinationSum4([1, 2, 3], 4))
-    print(solution.combinationSum4([9], 3))
+    print(solution.combinationSum4([4, 2, 1], 32)) # 39882198
+    print(solution.combinationSum4([1, 2, 3], 4)) # 7
+    print(solution.combinationSum4([9], 3)) # 0
