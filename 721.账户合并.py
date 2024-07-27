@@ -28,7 +28,6 @@
 from typing import List
 # @lc code=start
 
-
 class UnionFind:
     def __init__(self):
         self.parent = {}
@@ -77,7 +76,6 @@ class UnionFind:
                 else:
                     root = self.merge(account[i], root)
         return root
-
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:

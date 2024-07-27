@@ -68,7 +68,7 @@ class Solution:
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    # print(solution.decrypt([5, 7, 1, 4], 3))  # [12,10,16,13]
-    # print(solution.decrypt([1, 2, 3, 4], 0))  # [0,0,0,0]
+    print(solution.decrypt([5, 7, 1, 4], 3))  # [12,10,16,13]
+    print(solution.decrypt([1, 2, 3, 4], 0))  # [0,0,0,0]
     print(solution.decrypt([2, 4, 9, 3], -2))  # [12,5,6,13]
     print(solution.decrypt([2, 4, 9, 3], -3))  # [16,14,9,15]

@@ -41,7 +41,7 @@ class Solution:
             return N
 
         right = bisect(people, limit - people[0])
-        res = N - right
+        res = N - right # right往右的都只能独占一条船，不能共享
         right -= 1
         left = 0
         while left <= right:

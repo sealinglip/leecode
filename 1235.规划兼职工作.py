@@ -49,7 +49,8 @@ from typing import List
 class Solution:
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
         n = len(startTime)
-        # 常规方法一定一会TLE
+        # 动规
+        # 常规方法一定会TLE
         # 以结束时间排序
         jobs = sorted(zip(startTime, endTime, profit), key=lambda t: t[1])
 

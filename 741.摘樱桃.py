@@ -42,6 +42,7 @@ from typing import List
 
 class Solution:
     def cherryPickup(self, grid: List[List[int]]) -> int:
+        # 动规
         # 折返可以转换为两人一起走，能采摘到的最大🍒数
         # 记dp(k, x1, x2) 为 两人从 (0, 0) 同时出发，分别到达(x1, k-x1)，(x2, k-x2) 时摘到的最大🍒数，x1 <= x2
         # 有dp(k, x1, x2) = -∞ if grid[x1][k-x1] == -1 or grid[x2][k-x2] == -1 # 有荆棘表示场景不合法
@@ -87,3 +88,4 @@ if __name__ == "__main__":
             [1, 1,  1]]
     solution = Solution()
     print(solution.cherryPickup(grid))  # 5
+    print(solution.cherryPickup([[1,1,-1],[1,-1,1],[-1,1,1]])) # 0
