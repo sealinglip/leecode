@@ -40,6 +40,8 @@
 # 1 <= lefti <= 10^8
 # 1 <= sideLengthi <= 10^6
 
+# 复习
+
 from typing import List
 # @lc code=start
 
@@ -102,6 +104,7 @@ class SegmentTree:
 
 class Solution:
     def fallingSquares(self, positions: List[List[int]]) -> List[int]:
+        # 线段树
         ans, st, max_range = [], SegmentTree(), int(1e9)
         for a, length in positions:
             SegmentTree.update(st.root, 0, max_range, a, a + length - 1,
