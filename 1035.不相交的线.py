@@ -35,10 +35,11 @@ from typing import List
 
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
+        # 动态规划
         # 记dp(i, j) 为 nums1[i:] 和 nums2[j:]应用规则能得到的最大连线数
         # 记 M = len(nums1)，M = len(nums2)
         # 有 0 <= i < N，0 <= j < M
-        # dp(M - 1, N - 1) = 1 if nums1[M -1] == nums2[N - 1]
+        # dp(M - 1, N - 1) = 1 if nums1[M -1] == nums2[N - 1] else 0
         # dp(i, j) = dp(i + 1, j + 1) + 1 if nums1[i] = nums2[j] else max(dp(i + 1, j), dp(i, j + 1))
         # 答案即为dp(0, 0)
         M, N = len(nums1), len(nums2)

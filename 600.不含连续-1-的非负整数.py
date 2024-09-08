@@ -26,7 +26,18 @@ LastEditTime: 2021-09-11 22:58:39
 # 4: 100
 # 5: 101
 # 其中，只有整数3违反规则（有两个连续的1），其他5个满足规则。
-# 说明: 1 <= n <= 10^9
+
+# 示例 2:
+# 输入: n = 1
+# 输出: 2
+
+# 示例 3:
+# 输入: n = 2
+# 输出: 3
+ 
+
+# 提示:
+# 1 <= n <= 10^9
 
 # Hard
 
@@ -64,3 +75,5 @@ if __name__ == "__main__":
     solution = Solution()
     print(solution.findIntegers(5))  # 5
     print(solution.findIntegers(7))  # 5
+    print(solution.findIntegers(1))  # 2
+    print(solution.findIntegers(2))  # 3

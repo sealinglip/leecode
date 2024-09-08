@@ -65,3 +65,9 @@ class Solution:
 
         return total
         # @lc code=end
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.getImportance([[1,5,[2,3]],[2,3,[]],[3,3,[]]], 1)) # 11
+    print(solution.getImportance([[1,2,[5]],[5,-3,[]]], 5)) # -3
+    

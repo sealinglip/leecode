@@ -33,13 +33,15 @@ class Solution:
         if total % k != 0:
             return False  # 不能整除
         nums.sort()
-        quotient = total // k
-        if nums[-1] > quotient:
+        sideLen = total // k
+        if nums[-1] > sideLen:
             return False  # 最大的元素不能超过每份大小
 
-        # 记dp(x)
-        # x的第i位代表第i个数有没有放置，放的话想象一下要放置成一个正k边形
-        # dp(x) 表示当前放置的边的长度
+        # 考虑要将边长对应nums数组的线段拼接成一个正k边形，放置的方法是：当拼接某个线段后当前边长刚好为sideLen，则拼接后当前边已经拼接完成，开始拼下一条边
+        # 如果拼接某个线段后当前边长大于sideLen，则当前方案不合乎要求；如果拼接后长度小于sideLen，那么当前边还得接着拼
+        # 因为nums的长度小于等于16，如果用整数从低到高的位i来代表nums[i]是否已经拼接了且合乎要求
+        # x的第i位代表第i个数有没有放置
+        # 记dp(x) 表示当前放置的边的长度
         # 易知dp(0) = 0：什么都还没放，所以当前边长度为0
         # 如果 x1 &  (1 << k) == 0 (即第k个数还没放)
         # 且 dp(x1) + nums[k] <= quotient，那么
@@ -54,10 +56,10 @@ class Solution:
                 if x & (1 << k) == 0:
                     continue
                 x1 = x & ~(1 << k)  # 这等同于x1 加上第k根火柴为x
-                preDp = dp.get(x1, - 1)  # 默认为-1
-                if preDp >= 0 and preDp + v <= quotient:
+                preDp = dp.get(x1, - 1)  # 默认为-1，代表目前还没有dp(x1)的合乎要求的方案（不代表无解，只是当前还没有拼接方案）
+                if preDp >= 0 and preDp + v <= sideLen:
                     # 找到一种可行解
-                    dp[x] = (preDp + v) % quotient
+                    dp[x] = (preDp + v) % sideLen
                     break
 
         return dp.get((1 << len(nums)) - 1, -1) == 0
