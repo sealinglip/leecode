@@ -41,13 +41,13 @@ class Solution:
                 rList[s].append(i)
 
         if source == target:
-            return 0 if len(rList[source]) > 0 else -1
-        q = deque([(i, 1) for i in rList[source]])  # 初始化尝试队列
+            return 0
+        q = deque([(i, 1) for i in rList[source]])  # 初始化尝试队列，(车次，换乘次数)
         tried = set(rList[source])  # 记录尝试过的线路
         # BFS
         while q:
             i, cnt = q.popleft()
-            for s in routes[i]:
+            for s in routes[i]: # 第i趟线路能到达的车站
                 if s == target:
                     return cnt
                 else:
@@ -61,7 +61,8 @@ class Solution:
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.numBusesToDestination([[1, 7], [3, 5]], 5, 5))
-    print(solution.numBusesToDestination([[1, 2, 7], [3, 6, 7]], 1, 6))
+    print(solution.numBusesToDestination([[1,2,7],[3,6,7]], 10, 10)) # 0
+    print(solution.numBusesToDestination([[1, 7], [3, 5]], 5, 5)) # 0
+    print(solution.numBusesToDestination([[1, 2, 7], [3, 6, 7]], 1, 6)) # 2
     print(solution.numBusesToDestination(
-        [[7, 12], [4, 5, 15], [6], [15, 19], [9, 12, 13]], 15, 12))
+        [[7, 12], [4, 5, 15], [6], [15, 19], [9, 12, 13]], 15, 12)) # -1
