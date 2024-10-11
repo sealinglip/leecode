@@ -53,55 +53,75 @@ from typing import List
 # @lc code=start
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        if sum(gas) < sum(cost):
-            return -1
-        else:
-            N = len(gas)
-            delta = [gas[i] - cost[i] for i in range(N)]
-            # 需要找出有没有一个位置，从该位置开始，往后累积的delta都不小于0
-            # 从第一个非零的delta开始累计
-            accum = 0
-            start = 0
-            for i, v in enumerate(delta):
-                if v >= 0:
-                    start = i
-                    break
-            # 从start开始累计
-            block = None
-            tryStart, tryEnd = start, start + N
-            while tryStart < tryEnd:
-                for i in range(tryStart, tryEnd):
-                    if i >= N:
-                        i -= N
-                    accum = accum + delta[i]
-                    if accum < 0:
-                        # 到i位置受阻了
-                        block = i
-                        break
-                else:
-                    return start
+        # if sum(gas) < sum(cost):
+        #     return -1
+        # else:
+        #     N = len(gas)
+        #     delta = [gas[i] - cost[i] for i in range(N)]
+        #     # 需要找出有没有一个位置，从该位置开始，往后累积的delta都不小于0
+        #     # 从第一个非零的delta开始累计
+        #     accum = 0
+        #     start = 0
+        #     for i, v in enumerate(delta):
+        #         if v >= 0:
+        #             start = i
+        #             break
+        #     # 从start开始累计
+        #     block = None
+        #     tryStart, tryEnd = start, start + N
+        #     while tryStart < tryEnd:
+        #         for i in range(tryStart, tryEnd):
+        #             if i >= N:
+        #                 i -= N
+        #             accum = accum + delta[i]
+        #             if accum < 0:
+        #                 # 到i位置受阻了
+        #                 block = i
+        #                 break
+        #         else:
+        #             return start
                     
-                # 阻塞在block位置，从start往前找，看是否有合适的起点
-                backAccum = 0
-                for i in range(start - 1, block - N, -1):
-                    if i < 0:
-                        i += N
-                    backAccum += delta[i]
-                    if delta[i] > 0 and (backAccum + accum) >= 0:
-                        start = i # 新尝试起点
-                        accum += backAccum
-                        break
-                else:
-                    return -1 # 找不到合适的新起点
-                tryStart, tryEnd = block + 1, start if start > block else start + N
-            else:
-                return start
+        #         # 阻塞在block位置，从start往前找，看是否有合适的起点
+        #         backAccum = 0
+        #         for i in range(start - 1, block - N, -1):
+        #             if i < 0:
+        #                 i += N
+        #             backAccum += delta[i]
+        #             if delta[i] > 0 and (backAccum + accum) >= 0:
+        #                 start = i # 新尝试起点
+        #                 accum += backAccum
+        #                 break
+        #         else:
+        #             return -1 # 找不到合适的新起点
+        #         tryStart, tryEnd = block + 1, start if start > block else start + N
+        #     else:
+        #         return start
 
-            
+        # 如果从i站开始，不能通过j站（设j > i），那么从[i+1:j-1]区间的站开始，也都不能通过j站
+        # 要测试是否能绕一周，从0号站开始，尝试，如果到x站通不过，换成从x站开始尝试
+        start = 0
+        n = len(gas)
+        while start < n:
+            totalGas = totalCost = cnt = 0
+            while cnt < n:
+                i = (start + cnt) % n
+                totalGas += gas[i]
+                totalCost += cost[i]
+                if totalCost > totalGas:
+                    start += cnt + 1
+                    break
+                cnt += 1
+
+            if cnt == n:
+                return start
+        
+        return -1
+                
+
 # @lc code=end
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.canCompleteCircuit([5, 8, 2, 8], [6, 5, 6, 6]))
-    print(solution.canCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]))
-    print(solution.canCompleteCircuit([2, 3, 4], [3, 4, 3]))
+    print(solution.canCompleteCircuit([5, 8, 2, 8], [6, 5, 6, 6])) # 3
+    print(solution.canCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2])) # 3
+    print(solution.canCompleteCircuit([2, 3, 4], [3, 4, 3])) # -1

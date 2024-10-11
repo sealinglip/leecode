@@ -55,8 +55,8 @@ class BookMyShow:
         # 维护区间
         self.n = n
         self.m = m
-        self.min = [0] * (2 << n.bit_length())
-        self.sum = [0] * (2 << n.bit_length())
+        self.min = [0] * (2 << n.bit_length()) # 记录区间中排人数的最少值
+        self.sum = [0] * (2 << n.bit_length()) # 记录区间中的最人数
 
     def update(self, o: int, l: int, r: int, i: int, val: int) -> None:
         if l == r: # 找到🍃节点

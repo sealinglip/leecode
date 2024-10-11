@@ -38,13 +38,14 @@
 
 
 # 提示：
-# 1 <= target, startFuel, stations[i][1] <= 10 ^ 9
+# 1 <= target, startFuel, stations[i][1] <= 10^9
 # 0 <= stations.length <= 500
-# 0 < stations[0][0] < stations[1][0] < ... < stations[stations.length-1][0] < target
+# 1 <= positioni < positioni+1 < target
+# 1 <= fueli < 10^9
 
 # Hard
 # 复习
-from functools import cache
+
 from typing import List
 import heapq
 # @lc code=start
@@ -84,24 +85,24 @@ class Solution:
         # cnt = dp(startFuel-stations[0][0], 0)
         # return -1 if cnt == INF else cnt
 
-        # 优先队列
+        # 优先队列(贪心)
         hq = []
-        remainFuel = startFuel  # 当前剩余油
+        totalFuel = startFuel  # 当前剩余油
         pos = 0
         cnt = 0
-        while remainFuel < target:
+        while totalFuel < target:
             for i in range(pos, SL):
-                if remainFuel >= stations[i][0]:  # 够得到这个站
-                    # 把油拿上
+                if totalFuel >= stations[i][0]:  # 够得到这个站
+                    # 把站放入优先队列
                     heapq.heappush(hq, -stations[i][1])  # 小顶堆，所以转成负数
                     pos += 1
                 else:
                     break
-            if remainFuel < target:
+            if totalFuel < target:
                 if not hq:  # 没油可加
                     return -1
                 fuel = -heapq.heappop(hq)
-                remainFuel += fuel
+                totalFuel += fuel
                 cnt += 1
 
         return cnt
