@@ -36,6 +36,7 @@
 # special[i].length == n + 1
 # 0 <= special[i][j] <= 50
 
+from functools import cache
 from typing import List, Tuple
 # @lc code=start
 
@@ -48,8 +49,7 @@ class Solution:
         special = [x for x in special if all(needs[i] >= x[i] for i in range(N)) and sum(
             x[0:N]) > 0 and sum(price[i] * x[i] for i in range(N)) > x[-1]]
 
-        resultCache = {}
-
+        @cache
         def getMinPrice(curNeeds: Tuple) -> int:
             minPrice = sum(curNeeds[i] * price[i] for i in range(N))
             for s in special:
@@ -57,7 +57,6 @@ class Solution:
                 if all(nextNeeds[i] >= 0 for i in range(N)):
                     minPrice = min(minPrice, getMinPrice(
                         tuple(nextNeeds)) + s[-1])
-            resultCache[curNeeds] = minPrice
             return minPrice
 
         return getMinPrice(tuple(needs))

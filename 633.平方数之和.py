@@ -30,8 +30,6 @@
 # 0 <= c <= 2^31 - 1
 
 # @lc code=start
-import math
-
 
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:

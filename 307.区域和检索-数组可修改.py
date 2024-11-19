@@ -41,31 +41,106 @@
 # 复习
 from typing import List
 # @lc code=start
-SEC_SIZE = 50  # 分区大小
 
+# 方法1 - 分区
+# SEC_SIZE = 50  # 分区大小
+# class NumArray:
+
+#     def __init__(self, nums: List[int]):
+#         self.nums = nums
+#         self.secSum = [0] * ((len(nums) + SEC_SIZE - 1) // SEC_SIZE)  # 分区求和
+#         for i, num in enumerate(nums):
+#             j = i // SEC_SIZE
+#             self.secSum[j] += num
+
+#     def update(self, index: int, val: int) -> None:
+#         delta = val - self.nums[index]
+#         self.nums[index] = val
+#         self.secSum[index // SEC_SIZE] += delta
+
+#     def sumRange(self, left: int, right: int) -> int:
+#         i = left // SEC_SIZE
+#         j = right // SEC_SIZE
+#         # 和由三部分组成
+#         if i == j:
+#             return sum(self.nums[left:right+1], 0)
+#         else:
+#             return sum(self.nums[left:(i+1)*SEC_SIZE]) + sum(self.secSum[i+1:j]) + sum(self.nums[j*SEC_SIZE:right+1])
+
+# 方法2 - 树状数组（Binary Indexed Tree）
+# class NumArray:
+#     __slots__ = 'n', 'nums', 'tree'
+
+#     def __init__(self, nums: List[int]):
+#         n = len(nums)
+#         tree = [0] * (n+1)
+#         for i, x in enumerate(nums, 1):
+#             tree[i] += x
+#             up = i + (i & -i)
+#             if up <= n:
+#                 tree[up] += x
+#         self.n = n
+#         self.nums = nums
+#         self.tree = tree
+
+#     def update(self, index: int, val: int) -> None:
+#         delta = val - self.nums[index]
+#         self.nums[index] = val
+#         index += 1 # self.tree以1为基
+#         while index <= self.n:
+#             self.tree[index] += delta
+#             index += index & (-index)
+
+#     def prefixSum(self, i: int) -> int:
+#         s = 0
+#         while i:
+#             s += self.tree[i]
+#             i -= i & -i
+#         return s
+
+#     def sumRange(self, left: int, right: int) -> int:
+#         return self.prefixSum(right+1) - self.prefixSum(left)
+    
+
+# 方法3 —— 线段树（Segment Tree）
 
 class NumArray:
+    __slots__ = 'n', 'tree'
 
     def __init__(self, nums: List[int]):
-        self.nums = nums
-        self.secSum = [0] * ((len(nums) + SEC_SIZE - 1) // SEC_SIZE)  # 分区求和
-        for i, num in enumerate(nums):
-            j = i // SEC_SIZE
-            self.secSum[j] += num
+        self.n = len(nums)
+        self.tree = [0] * (self.n << 1)
+        self.build(nums)
+
+    def build(self, data: List[int]) -> None:
+        # 将数据填充到叶子节点
+        self.tree[-self.n:] = data
+        # 构建树
+        for i in range(self.n-1, 0, -1):
+            self.tree[i] = self.tree[i << 1] + self.tree[i << 1 | 1]
 
     def update(self, index: int, val: int) -> None:
-        delta = val - self.nums[index]
-        self.nums[index] = val
-        self.secSum[index // SEC_SIZE] += delta
+        index += self.n
+        self.tree[index] = val
+        while index > 1:
+            index >>= 1
+            self.tree[index] = self.tree[index << 1] + self.tree[index << 1 | 1]
 
     def sumRange(self, left: int, right: int) -> int:
-        i = left // SEC_SIZE
-        j = right // SEC_SIZE
-        # 和由三部分组成
-        if i == j:
-            return sum(self.nums[left:right+1], 0)
-        else:
-            return sum(self.nums[left:(i+1)*SEC_SIZE]) + sum(self.secSum[i+1:j]) + sum(self.nums[j*SEC_SIZE:right+1])
+        # 查询区间[left, right]
+        res = 0
+        # 转成开区间
+        left += self.n - 1
+        right += self.n + 1
+        while (left ^ right) != 1:
+            if left & 1 == 0:
+                res += self.tree[left^1] # left+1
+            if right & 1 == 1:
+                res += self.tree[right^1] # right-1
+
+            left >>= 1
+            right >>= 1
+        return res
 
         # Your NumArray object will be instantiated and called as such:
         # obj = NumArray(nums)
