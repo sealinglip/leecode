@@ -47,28 +47,25 @@ from typing import List
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         board = [['.'] * n for i in range(n)]
-        rows = [False for i in range(n)]
         cols = [False for i in range(n)]
         diag = [False for i in range(n << 1)]
         backdiag = [False for i in range(n << 1)]
         res = []
 
         def placeQueen(row: int, col: int):
-            rows[row] = True
             cols[col] = True
             diag[row + col] = True
             backdiag[col - row + n] = True
             board[row][col] = 'Q'
 
         def replaceQueen(row: int, col: int):
-            rows[row] = False
             cols[col] = False
             diag[row + col] = False
             backdiag[col - row + n] = False
             board[row][col] = '.'
 
         def canPlaceQueen(row: int, col: int):
-            return not (rows[row] or cols[col] or diag[row + col] or backdiag[col - row + n])
+            return not (cols[col] or diag[row + col] or backdiag[col - row + n])
 
         def solve(row: int):
             if row == n:  # 求解成功

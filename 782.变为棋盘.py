@@ -48,9 +48,10 @@ class Solution:
             colMask |= board[i][0] << i
         reverseRowMask = ((1 << n) - 1) ^ rowMask
         reverseColMask = ((1 << n) - 1) ^ colMask
-        rowCnt = colCnt = 0
-        for i in range(n):
-            currRowMask = currColMask = 0
+        # 所有行要么是rowMask，要么是reverseRowMask，列也类似，否则无解
+        rowCnt = colCnt = 1
+        for i in range(1, n):
+            currRowMask = currColMask = 0 # 第i行，第i列
             for j in range(n):
                 currRowMask |= board[i][j] << j
                 currColMask |= board[j][i] << j
@@ -87,3 +88,9 @@ class Solution:
         colMoves = getMoves(colMask, colCnt)
         return -1 if rowMoves == -1 or colMoves == -1 else rowMoves + colMoves
         # @lc code=end
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.movesToChessboard([[0,1,1,0],[0,1,1,0],[1,0,0,1],[1,0,0,1]])) # 2
+    print(solution.movesToChessboard([[0, 1], [1, 0]])) # 0
+    print(solution.movesToChessboard([[1, 0], [1, 0]])) # -1
