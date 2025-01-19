@@ -16,6 +16,12 @@ class ListNode:
         self.val = x
         self.next = next
 
+    def __str__(self):
+        return f'ListNode({self.val})'
+    
+    def __repr__(self):
+        return self.__str__()
+
     @classmethod
     def convert_list(cls, nums: List[int]) -> 'ListNode':
         if not nums:

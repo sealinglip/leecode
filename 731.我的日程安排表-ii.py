@@ -33,7 +33,6 @@
 # 线段树
 
 from collections import defaultdict
-from typing import Set
 # @lc code=start
 
 
@@ -71,3 +70,12 @@ class MyCalendarTwo:
         # obj = MyCalendarTwo()
         # param_1 = obj.book(start,end)
         # @lc code=end
+
+if __name__ == "__main__":
+    myCalendarTwo = MyCalendarTwo()
+    print(myCalendarTwo.book(10, 20)) # True
+    print(myCalendarTwo.book(50, 60)) # True
+    print(myCalendarTwo.book(10, 40)) # True
+    print(myCalendarTwo.book(5, 15)) # False
+    print(myCalendarTwo.book(5, 10)) # True
+    print(myCalendarTwo.book(25, 55)) # True

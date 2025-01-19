@@ -16,6 +16,12 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    def __str__(self):
+        return f'TreeNode({self.val})'
+    
+    def __repr__(self):
+        return self.__str__()
+
     # BFS遍历树解法
     def serialize(self) -> str:
         """Encodes a tree to a single string.

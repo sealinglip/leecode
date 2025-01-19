@@ -44,7 +44,7 @@ class ExamRoom:
         if not self.students:
             student = 0
         else:
-            dist, student = self.students[0], 0  # 先假设做第一把交椅
+            dist, student = self.students[0], 0  # 先假设坐第一把交椅
             for i, s in enumerate(self.students):
                 if i:
                     prev = self.students[i-1]
@@ -66,3 +66,12 @@ class ExamRoom:
         # param_1 = obj.seat()
         # obj.leave(p)
         # @lc code=end
+
+if __name__ == "__main__":
+    room = ExamRoom(10)
+    print(room.seat()) # 0
+    print(room.seat()) # 9
+    print(room.seat()) # 4
+    print(room.seat()) # 2
+    room.leave(4)
+    print(room.seat()) # 5
