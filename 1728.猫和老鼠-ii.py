@@ -71,6 +71,7 @@ class Solution:
         ROWS, COLS = len(grid), len(grid[0])
         WALLS = set()
         CELLS = ROWS * COLS  # 可到达的格子数，下面要遍历棋盘减掉墙
+        cat = mouse = food = None
         for i in range(ROWS):
             for j in range(COLS):
                 if grid[i][j] == 'F':

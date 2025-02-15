@@ -40,55 +40,34 @@
 # 1 <= m, n <= 100
 # grid[i][j] 为 1 或 - 1
 
-from typing import List, Tuple
+from typing import List
 # @lc code=start
 
 
 class Solution:
     def findBall(self, grid: List[List[int]]) -> List[int]:
-        m, n = len(grid), len(grid[0])
-        # 以1,2,3,4代表上左右下
-
-        def passThrough(pos: Tuple[int]) -> Tuple[int]:
-            '''
-            给定位置和进入方向，得到出的位置
-            dir只能为1，2，3
-            '''
-            if pos[2] == 1:
-                # 从上进
-                if grid[pos[0]][pos[1]] == 1:
-                    if pos[1] == n - 1:
-                        return None  # 路不通
+        n = len(grid[0])
+        # 模拟
+        res = list(range(n)) # 记录初始位置
+        # 每下一层，要么往左，要么往右，要么卡住
+        for row in grid:
+            for i in range(n):
+                if res[i] != -1: # 还没卡住
+                    if res[i] == 0:
+                        if n == 1 or row[0] == -1 or row[1] == -1:
+                            res[i] = -1
+                        else:
+                            res[i] = 1 
+                    elif res[i] == n-1:
+                        if row[n-1] == 1 or row[n-2] == 1:
+                            res[i] = -1
+                        else:
+                            res[i] -= 1
                     else:
-                        return (pos[0], pos[1] + 1, 2)
-                else:
-                    if pos[1] == 0:
-                        return None  # 路不通
-                    else:
-                        return (pos[0], pos[1] - 1, 3)
-
-            elif pos[2] == 2:
-                # 从左进
-                if grid[pos[0]][pos[1]] == 1:
-                    return (pos[0] + 1, pos[1], 1)
-                else:
-                    return None  # 路不通
-            elif pos[2] == 3:
-                # 从右进
-                if grid[pos[0]][pos[1]] == 1:
-                    return None
-                else:
-                    return (pos[0] + 1, pos[1], 1)
-
-        res = []
-        for col in range(n):
-            pos = (0, col, 1)
-            while (pos := passThrough(pos)):
-                if pos[0] == m:
-                    res.append(pos[1])
-                    break
-            else:
-                res.append(-1)
+                        if row[res[i]] == 1:
+                            res[i] = -1 if row[res[i]+1] == -1 else res[i]+1
+                        else:
+                            res[i] = -1 if row[res[i]-1] == 1 else res[i]-1
 
         return res
 

@@ -81,10 +81,10 @@ class Solution:
                     lb += 1
                     dir = 1
         return res
-        pass
 # @lc code=end
 
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.generateMatrix(3))
+    print(solution.generateMatrix(3)) # [[1,2,3],[8,9,4],[7,6,5]]
+    print(solution.generateMatrix(1)) # [[1]]

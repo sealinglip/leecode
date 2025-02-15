@@ -43,63 +43,123 @@
 
 # Hard
 # 复习
+# 老的解法会TLE
+# DRAW = 0
+# MOUSE_WIN = 1
+# CAT_WIN = 2
 
+
+# class Solution:
+#     def catMouseGame(self, graph: List[List[int]]) -> int:
+#         # 记忆搜索
+#         n = len(graph)  # 节点数（位置数）
+#         # 所有场景数为：🐭可以有n个位置，🐱有n-1个位置，当前轮次的奇偶性有两种情况，所以是2 * n * (n-1)
+#         cases = (n << 1) * (n-1) 
+#         dp = [[[-1] * cases for _ in range(n)] for _ in range(n)] # dp[i][j][k] 记录🐭在i，🐱在j，经过k轮之后的胜负结果——未推断过，为-1
+
+#         def getResult(mouse: int, cat: int, turns: int) -> int:
+#             if turns >= cases:
+#                 return DRAW
+
+#             if dp[mouse][cat][turns] != -1:
+#                 return dp[mouse][cat][turns]
+
+#             if mouse == 0:
+#                 dp[mouse][cat][turns] = MOUSE_WIN
+#             elif cat == mouse:
+#                 dp[mouse][cat][turns] = CAT_WIN
+#             else:
+#                 if (turns & 1):  # cat move
+#                     res = MOUSE_WIN
+#                     for nxt in graph[cat]:
+#                         if nxt == 0:  # 猫不允许到0位
+#                             continue
+#                         nextRes = getResult(mouse, nxt, turns + 1)
+#                         if nextRes == DRAW:
+#                             res = DRAW
+#                         elif nextRes == CAT_WIN:
+#                             res = CAT_WIN
+#                             break
+#                     dp[mouse][cat][turns] = res
+#                     return res
+
+#                 else:  # mouse move
+#                     res = CAT_WIN
+#                     for nxt in graph[mouse]:
+#                         nextRes = getResult(nxt, cat, turns + 1)
+#                         if nextRes == DRAW:
+#                             res = DRAW
+#                         elif nextRes == MOUSE_WIN:
+#                             res = MOUSE_WIN
+#                             break
+#                     dp[mouse][cat][turns] = res
+#                     return res
+
+#             return dp[mouse][cat][turns]
+
+#         return getResult(1, 2, 0)
+
+from collections import deque
 from typing import List
 # @lc code=start
+MOUSE_TURN = 0
+CAT_TURN = 1
+
 DRAW = 0
 MOUSE_WIN = 1
 CAT_WIN = 2
 
-
 class Solution:
     def catMouseGame(self, graph: List[List[int]]) -> int:
-        n = len(graph)  # 节点数（位置数）
-        dp = [[[-1] * (n << 1) for _ in range(n)] for _ in range(n)]
+        n = len(graph)
+        degrees = [[[0, 0] for _ in range(n)] for _ in range(n)]
+        results = [[[0, 0] for _ in range(n)] for _ in range(n)]
+        for i in range(n):
+            for j in range(1, n):
+                degrees[i][j][MOUSE_TURN] = len(graph[i])
+                degrees[i][j][CAT_TURN] = len(graph[j])
+        for y in graph[0]:
+            for i in range(n):
+                degrees[i][y][CAT_TURN] -= 1
 
-        def getResult(mouse: int, cat: int, turns: int) -> int:
-            if turns >= (n << 1):
-                return DRAW
+        q = deque()
+        for j in range(1, n):
+            results[0][j][MOUSE_TURN] = MOUSE_WIN
+            results[0][j][CAT_TURN] = MOUSE_WIN
+            q.append((0, j, MOUSE_TURN))
+            q.append((0, j, CAT_TURN))
+        for i in range(1, n):
+            results[i][i][MOUSE_TURN] = CAT_WIN
+            results[i][i][CAT_TURN] = CAT_WIN
+            q.append((i, i, MOUSE_TURN))
+            q.append((i, i, CAT_TURN))
 
-            if dp[mouse][cat][turns] != -1:
-                return dp[mouse][cat][turns]
-
-            if mouse == 0:
-                dp[mouse][cat][turns] = MOUSE_WIN
-            elif cat == mouse:
-                dp[mouse][cat][turns] = CAT_WIN
+        while q:
+            mouse, cat, turn = q.popleft()
+            result = results[mouse][cat][turn]
+            if turn == MOUSE_TURN:
+                prevStates = [(mouse, prev, CAT_TURN) for prev in graph[cat]]
             else:
-                if (turns & 1):  # cat move
-                    res = MOUSE_WIN
-                    for next in graph[cat]:
-                        if next == 0:  # 猫不允许到0位
-                            continue
-                        nextRes = getResult(mouse, next, turns + 1)
-                        if nextRes == DRAW:
-                            res = DRAW
-                        elif nextRes == CAT_WIN:
-                            res = CAT_WIN
-                            break
-                    dp[mouse][cat][turns] = res
-                    return res
-
-                else:  # mouse move
-                    res = CAT_WIN
-                    for next in graph[mouse]:
-                        nextRes = getResult(next, cat, turns + 1)
-                        if nextRes == DRAW:
-                            res = DRAW
-                        elif nextRes == MOUSE_WIN:
-                            res = MOUSE_WIN
-                            break
-                    dp[mouse][cat][turns] = res
-                    return res
-
-            return dp[mouse][cat][turns]
-
-        return getResult(1, 2, 0)
+                prevStates = [(prev, cat, MOUSE_TURN) for prev in graph[mouse]]
+            for prevMouse, prevCat, prevTurn in prevStates:
+                if prevCat == 0:
+                    continue
+                if results[prevMouse][prevCat][prevTurn] == DRAW:
+                    canWin = result == MOUSE_WIN and prevTurn == MOUSE_TURN or result == CAT_WIN and prevTurn == CAT_TURN
+                    if canWin:
+                        results[prevMouse][prevCat][prevTurn] = result
+                        q.append((prevMouse, prevCat, prevTurn))
+                    else:
+                        degrees[prevMouse][prevCat][prevTurn] -= 1
+                        if degrees[prevMouse][prevCat][prevTurn] == 0:
+                            results[prevMouse][prevCat][prevTurn] = CAT_WIN if prevTurn == MOUSE_TURN else MOUSE_WIN
+                            q.append((prevMouse, prevCat, prevTurn))
+        return results[1][2][MOUSE_TURN]
 
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
+    print(solution.catMouseGame([[1,3],[0],[3],[0,2]])) # 1
     print(solution.catMouseGame(
         [[2, 5], [3], [0, 4, 5], [1, 4, 5], [2, 3], [0, 2, 3]]))  # 0
+    print(solution.catMouseGame([[5,7,9],[3,4,5,6],[3,4,5,8],[1,2,6,7],[1,2,5,7,9],[0,1,2,4,8],[1,3,7,8],[0,3,4,6,8],[2,5,6,7,9],[0,4,8]])) # 1

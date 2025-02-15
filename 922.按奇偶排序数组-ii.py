@@ -50,4 +50,5 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.sortArrayByParityII([4, 2, 5, 7]))
+    print(solution.sortArrayByParityII([4, 2, 5, 7])) # [4, 5, 2, 7]
+    print(solution.sortArrayByParityII([2, 3])) # [2, 3]
