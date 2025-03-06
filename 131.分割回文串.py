@@ -57,4 +57,5 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.partition("aab"))
+    print(solution.partition("aab")) # [["a","a","b"],["aa","b"]]
+    print(solution.partition("a")) # [["a"]]

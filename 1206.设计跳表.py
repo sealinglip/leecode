@@ -51,7 +51,7 @@
 
 
 # 提示:
-# 0 <= num, target <= 2 * 104
+# 0 <= num, target <= 2 * 10^4
 # 调用search, add,  erase操作次数不大于 5 * 10^4
 
 # Hard
