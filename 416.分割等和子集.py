@@ -28,6 +28,7 @@ LastEditTime: 2020-10-11 10:22:59
 # 输入: [1, 2, 3, 5]
 # 输出: false
 # 解释: 数组不能分割成两个元素和相等的子集.
+# 复习
 
 from typing import List
 # @lc code=start
