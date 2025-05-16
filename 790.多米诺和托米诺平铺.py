@@ -28,20 +28,25 @@ class Solution:
     def numTilings(self, n: int) -> int:
         MOD = 10 ** 9 + 7
 
-        dp = [[0] * 4 for _ in range(n + 1)]
+        dp = [[0] * 4 for _ in range(n + 1)] # dp[i] 的四个元素分别代表2 * i的区域，其右 2 * 1区域的四种覆盖情况，分别对应的方法数
+        # 0，都没有覆盖；
+        # 1：上方被覆盖；
+        # 2：上方被覆盖
+        # 3：全覆盖——这种铺设才是满足题意的答案，其他三种是为了实现状态转移
         dp[0][3] = 1
         for i in range(1, n + 1):
             dp[i][0] = dp[i - 1][3]
             dp[i][1] = (dp[i - 1][0] + dp[i - 1][2]) % MOD
             dp[i][2] = (dp[i - 1][0] + dp[i - 1][1]) % MOD
-            dp[i][3] = (((dp[i - 1][0] + dp[i - 1][1]) %
-                        MOD + dp[i - 1][2]) % MOD + dp[i - 1][3]) % MOD
+            dp[i][3] = (dp[i - 1][0] + dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][3]) % MOD
         return dp[n][3]
 
 
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
+    print(solution.numTilings(1))  # 1
+    print(solution.numTilings(3))  # 5
     print(solution.numTilings(4))  # 11
     print(solution.numTilings(5))  # 24
-    print(solution.numTilings(1000))
+    print(solution.numTilings(1000)) # 979232805
