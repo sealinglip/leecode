@@ -47,7 +47,8 @@ class Solution:
         # 那么有 n = ceil(log(buckets)/log(M+1))
         # 将桶从0开始编号，将编号转为(M+1)进制的数
         # 对于第i位的小猪，第j轮（j <= M)它需要饮用编号的第i位值为j的所有桶
-        return ceil(log(buckets)/log(M+1))
+        # 要注意浮点数的精度问题
+        return ceil(log(buckets)/log(M+1) - 1e-5)
         # @lc code=end
 
 
