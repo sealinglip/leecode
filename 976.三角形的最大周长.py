@@ -46,7 +46,8 @@ class Solution:
 
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.largestPerimeter([2,1,2]))
-    print(solution.largestPerimeter([1,2,1]))
-    print(solution.largestPerimeter([3,2,3,4]))
-    print(solution.largestPerimeter([3,6,2,3]))
+    print(solution.largestPerimeter([2,1,2])) # 5
+    print(solution.largestPerimeter([1,2,1,10])) # 0
+    print(solution.largestPerimeter([1,2,1])) # 0
+    print(solution.largestPerimeter([3,2,3,4])) # 10
+    print(solution.largestPerimeter([3,6,2,3])) # 8
