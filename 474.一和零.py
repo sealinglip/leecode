@@ -40,7 +40,7 @@ class Solution:
         # 计dp[i][j][k]为前i个数组成的0不超过j，1不超过k的最大子集大小
         # 计cnt[i]为第i个字符串中0的个数和1的个数
         # 则有 dp[i+1][j][k] = max(dp[i][j][k], dp[i][j-cnt[i][0]][k-cnt[i][1]] + 1) if j >= cnt[i][0] and k >= cnt[i][1]
-        #                   = dp[i][j][k] if j < cnt[i][0] | k < cnt[i][1]
+        #                   = dp[i][j][k] if j < cnt[i][0] or k < cnt[i][1]
         # 由于i+1 完全依赖于i，可以将三维dp简化为二维dp
         # 最后就是要求dp[m][n]
         N = len(strs)
