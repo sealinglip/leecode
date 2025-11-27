@@ -54,4 +54,7 @@ class Solution:
         # @lc code=end
 if __name__ == "__main__":
     solution = Solution()
-    print(solution.prefixesDivBy5([0, 1, 1, 1, 1, 1]))
+    print(solution.prefixesDivBy5([0, 1, 1, 1, 1, 1])) # [True, False, False, False, True, False]
+    print(solution.prefixesDivBy5([0, 1, 1])) # [True, False, False]
+    print(solution.prefixesDivBy5([1, 1, 1])) # [False, False, False]
+    print(solution.prefixesDivBy5([1, 1, 1, 0, 1])) # [False, False, False, False, False]

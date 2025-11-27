@@ -33,35 +33,45 @@ from typing import List
 
 class Solution:
     def maxSumDivThree(self, nums: List[int]) -> int:
-        res = 0
-        stat = [[0, 0, inf, inf]
-                for _ in range(2)]  # 分别记录余数为1和2的数的个数、总和、最小和次最小
-        for num in nums:
-            r = num % 3
-            if r == 0:
-                res += num
-            else:
-                r -= 1
-                stat[r][0] += 1
-                stat[r][1] += num
-                if num <= stat[r][2]:
-                    stat[r][3] = stat[r][2]
-                    stat[r][2] = num
-                elif num < stat[r][3]:
-                    stat[r][3] = num
+        # 方法1：贪心
+        # res = 0
+        # stat = [[inf, inf]
+        #         for _ in range(2)]  # 分别记录余数为1和2的数的最小和次最小
+        # for num in nums:
+        #     res += num
+        #     r = num % 3 # 看余数分别处理
+        #     if r:
+        #         r -= 1
+        #         if num <= stat[r][0]:
+        #             stat[r][0], stat[r][1] = num, stat[r][0]
+        #         elif num < stat[r][1]:
+        #             stat[r][1] = num
 
-        res += stat[0][1] + stat[1][1]
-        r = (stat[0][0] - stat[1][0]) % 3
-        if r == 2:  # 余数为1的多俩或者少一个
-            delta = stat[1][2] if stat[0][0] < 2 else min(
-                stat[1][2], stat[0][2] + stat[0][3])
-            res -= delta
-        elif r == 1:  # 余数为1的多一个或者少俩
-            delta = stat[0][2] if stat[1][0] < 2 else min(
-                stat[0][2], stat[1][2] + stat[1][3])
-            res -= delta
+        # r = res % 3
+        # if r == 1:
+        #     # 如果余数是1，要么舍弃余数为1的最小的数，或余数为2的最小的两个数
+        #     res -= min(sum(stat[1]), stat[0][0])
+        # elif r == 2:
+        #     # 如果余数是2，要么舍弃余数为2的最小的数，或余数为1的最小的两个数
+        #     res -= min(sum(stat[0]), stat[1][0])
 
-        return res
+        # return res
+
+        # 方法2：动规
+        # 记dp(i,j)为前i个数选出部分数使其和模3余数为j时能达到的最大和
+        # 已知dp(0,0) = 0, dp(0,1) = dp(0,2) = -∞
+        # 从当前数模3的余数来推到状态转移方案，比较简单
+        # 又dp(i, *)只依赖dp(i-1, *)，状态矩阵可以压缩
+        dp = [-inf] * 3
+        dp[0] = 0
+        for x in nums:
+            r = x % 3
+            tmp = dp[:]
+            for i in range(3):
+                tmp[(i+r) % 3] = max(tmp[(i+r) % 3], dp[i] + x)
+            dp = tmp
+            
+        return dp[0]
 
 
         # @lc code=end
