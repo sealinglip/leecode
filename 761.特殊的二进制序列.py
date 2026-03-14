@@ -48,3 +48,8 @@ class Solution:
         subs.sort(reverse=True)  # 降序排列
         return "".join(subs)
         # @lc code=end
+
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.makeLargestSpecial("11011000")) # "11100100"
+    print(solution.makeLargestSpecial("10")) # "10"

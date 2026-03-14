@@ -42,7 +42,7 @@ LastEditTime: 2022-11-29 08:58:12
 # @lc code=start
 class Solution:
     def minOperations(self, s: str) -> int:
-        dp0 = dp1 = 0
+        dp0 = dp1 = 0 # 记录到某个位置时，前缀调整成交替字符串的最少操作次数，dp0代表末尾调为0的次数，dp1代表末尾调为1的次数
         for c in s:
             dp0, dp1 = dp1 + (1 if c == '1' else 0), dp0 + (1 if c == '0' else 0)
         return min(dp0, dp1)

@@ -29,17 +29,8 @@
 # @lc code=start
 class Solution:
     def hasAlternatingBits(self, n: int) -> bool:
-        flag = n & 1
-        alternating = True
-        n >>= 1
-        while n:
-            flag = 1 - flag
-            if n & 1 != flag:
-                alternating = False
-                break
-            n >>= 1
-
-        return alternating
+        a = (n ^ (n >> 1)) + 1 # 如果n是交替位二进制数，则a应该为2的整数次幂
+        return a > 0 and a.bit_count() == 1
 
 
 # @lc code=end
